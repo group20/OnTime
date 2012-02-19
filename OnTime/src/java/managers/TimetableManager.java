@@ -9,7 +9,7 @@ public class TimetableManager {
 
     public TimetableManager()
     {
-        
+        //edit for git test
     }
     
     public void outputTimetable(String user) throws FileNotFoundException, IOException
