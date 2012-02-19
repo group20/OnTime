@@ -1,10 +1,9 @@
 <%-- 
     Document   : index
     Created on : Feb 16, 2012, 9:26:37 PM
-    Author     : Donnchadh testing
+    Author     : Donnchadh
 --%>
 
-<%@page import="sun.rmi.log.LogOutputStream"%>
 <!doctype html>
 <html lang="en">
     <head>

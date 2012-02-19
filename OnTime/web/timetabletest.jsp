@@ -1,38 +1,15 @@
 <%-- 
-    Document   : success
-    Created on : Feb 17, 2012, 8:15:06 PM
+    Document   : timetabletest
+    Created on : 19-Feb-2012, 18:06:04
     Author     : Donnchadh
 --%>
 
-<%@ page contentType="text/html; charset=iso-8859-1" language="java"%>
-
-<%
-    /*
-     * String userName = null; //TODO: possibly more secure using try catch? try
-     * {
-     *
-     *
-     * } catch (Exception e) { } if (userName == null) {
-     *
-     * }
-     */
-    String userName = (String) session.getAttribute("sessUserName");
-    if (userName == null) {
-        response.sendRedirect(".");
-    }
-
-
-%>
-
-<!doctype html>
-<html lang="en">
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Team 20</title>
-        <meta name="description" content="Team 20's Project">
-        <meta name="author" content="Team 20">
-        <link rel="stylesheet" href="css/style.css?v=1.0">
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style2.css">
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script type="text/javascript">
@@ -49,10 +26,6 @@
         </script>
     </head>
     <body>
-        <p>You have successfully logged into Team 20's Timetable System</p>
-        <%
-            out.print("UserName :" + session.getAttribute("sessUserName") + "<br>");
-        %>
         <div id="calendar">					
             <div id="calcontainer">
                 <div id="calheader">
@@ -649,7 +622,5 @@
             </div>				
         </div>	
     </div>
-    <a href="logout.jsp"><b>Logout</b></a>
 </body>
-<footer>A Team 20 Project.</footer>
 </html>
