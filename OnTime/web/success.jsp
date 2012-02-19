@@ -53,6 +53,7 @@
         <%
             out.print("UserName :" + session.getAttribute("sessUserName") + "<br>");
         %>
+        
         <div id="calendar">					
             <div id="calcontainer">
                 <div id="calheader">
