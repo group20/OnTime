@@ -12,7 +12,9 @@
         <meta name="description" content="Team 20's Project">
         <meta name="author" content="Team 20">
         <link rel="stylesheet" href="css/style.css?v=1.0">
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
     </head>
     <body>
         <form id="login" method="post" action="sessionAction.jsp"> 
@@ -22,10 +24,10 @@
             <input type="submit" value="Sign in" name="submit" class="submit" />
             <h3>
                 <%
-                            String details = request.getParameter("details");
-                            if (details != null) {
-                                out.print(details);
-                            }
+                    String details = request.getParameter("details");
+                    if (details != null) {
+                        out.print(details);
+                    }
                 %>
             </h3>
         </form>

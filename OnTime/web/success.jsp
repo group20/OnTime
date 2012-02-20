@@ -2,9 +2,13 @@
     Document   : success
     Created on : Feb 17, 2012, 8:15:06 PM
     Author     : Donnchadh
+
+notes: Must create function to highlight the current day (.today)
+       Must create function to make the current week bigger (.big)
 --%>
 
 <%@ page contentType="text/html; charset=iso-8859-1" language="java"%>
+<%@page session="true" import="java.util.*" %>
 
 <%
     /*
@@ -20,8 +24,28 @@
     if (userName == null) {
         response.sendRedirect(".");
     }
+%>
 
+<%
+    int currYear = 0;
+    int currMonth = 0;
+    int currDay = 0;
+    
+    Calendar c = Calendar.getInstance();
+    Calendar cal = Calendar.getInstance();
+    currMonth = c.get(c.MONTH);
+    currYear = c.get(c.YEAR);
+    currDay = c.get(c.DAY_OF_MONTH);
+%>
 
+<% //to be made into a library
+    
+    String[] monthName = {"January", "February",
+        "March", "April", "May", "June", "July",
+        "August", "September", "October", "November",
+        "December"
+    };
+    String month = monthName[currMonth];  
 %>
 
 <!doctype html>
@@ -32,8 +56,7 @@
         <meta name="description" content="Team 20's Project">
         <meta name="author" content="Team 20">
         <link rel="stylesheet" href="css/style.css?v=1.0">
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/style2.css">
+        <link rel="stylesheet" href="css/style2.css?v=1.0">
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script type="text/javascript">
             function initMenu() {
@@ -47,17 +70,23 @@
             );}
             $(document).ready(function() {initMenu();});
         </script>
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
     </head>
     <body>
-        <p>You have successfully logged into Team 20's Timetable System</p>
-        <%
-            out.print("UserName :" + session.getAttribute("sessUserName") + "<br>");
-        %>
-        
+        <div id="welcome"
+             <p>You have successfully logged into Team 20's Timetable System</p>
+            <%
+                out.print("UserName : " + session.getAttribute("sessUserName"));
+            %>
+            <p><a href="logout.jsp">Logout</a></p>
+        </div>
+
         <div id="calendar">					
             <div id="calcontainer">
                 <div id="calheader">
-                    <h2>November 2011</h2>
+                    <h2><%=month + " " + currYear%></h2>
                 </div>		
                 <div id="daysweek">
                     <div class="dayweek"><p>Monday</p></div>
@@ -309,7 +338,7 @@
                     </div>	
                     <!---------------------------------------- week 3 ---------------------------------------->
                     <div class="week">
-                        <div class="day big">
+                        <div class="day">
                             <div class="daybar"><p>14</p></div>
                             <div class="dots">
                                 <ul>
@@ -324,7 +353,7 @@
                             </div>	
                             <!-- slide closed -->
                         </div>		
-                        <div class="day big">
+                        <div class="day">
                             <div class="daybar"><p>15</p></div>
                             <div class="dots">
                                 <ul>
@@ -341,7 +370,7 @@
                             </div>	
                             <!-- slide closed -->
                         </div>				
-                        <div class="day today big">
+                        <div class="day">
                             <div class="daybar"><p>16</p></div>
                             <div class="dots">
                                 <ul>
@@ -358,7 +387,7 @@
                             </div>	
                             <!-- slide closed -->
                         </div>			
-                        <div class="day big">
+                        <div class="day">
                             <div class="daybar"><p>17</p></div>
                             <div class="dots">
                                 <ul>
@@ -373,7 +402,7 @@
                             </div>	
                             <!-- slide closed -->
                         </div>	
-                        <div class="day big">
+                        <div class="day">
                             <div class="daybar"><p>18</p></div>
                             <div class="dots">
                                 <ul>
@@ -388,7 +417,7 @@
                             </div>	
                             <!-- slide closed -->
                         </div>			
-                        <div class="day big">
+                        <div class="day">
                             <div class="daybar"><p>19</p></div>
                             <div class="dots">
                                 <ul>
@@ -405,7 +434,7 @@
                             </div>	
                             <!-- slide closed -->
                         </div>				
-                        <div class="day big brn">
+                        <div class="day brn">
                             <div class="daybar"><p>20</p></div>
                             <div class="dots">
                                 <ul>
@@ -650,7 +679,6 @@
             </div>				
         </div>	
     </div>
-    <a href="logout.jsp"><b>Logout</b></a>
 </body>
 <footer>A Team 20 Project.</footer>
 </html>
