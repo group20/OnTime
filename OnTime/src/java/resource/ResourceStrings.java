@@ -21,7 +21,7 @@ public class ResourceStrings {
 	static{
 		configFile = new Properties();
 		try {
-			configFile.load(new FileInputStream("src/config.properties"));
+			configFile.load(new FileInputStream("src/java/resource/config.properties"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -2,10 +2,7 @@ package managers;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import javafiles.Event;
 
@@ -14,16 +11,19 @@ import resource.ResourceStrings;
 public class DBManager {
 //this is a comment
 	private Connection conn;
+        private Statement statement;
 	private String host;
 	private String db_userid;
 	private String db_password;
 
-	public DBManager() throws FileNotFoundException, IOException {
+	//public DBManager() throws FileNotFoundException, IOException {
+        public void initialise(){
 		host = ResourceStrings.DB_HOSTNAME;
 		db_userid = ResourceStrings.DB_USERNAME;
 		db_password = ResourceStrings.DB_PASSWORD;
-		conn = this.dbConnect(host, db_userid, db_password);
-	}
+		conn = dbConnect(host, db_userid, db_password);
+        }
+	//}
 
 	public Connection dbConnect(String db_connect_string, String db_userid,
 			String db_password) {
@@ -41,21 +41,16 @@ public class DBManager {
 		}
 	}
 	
-	public void addUser(String firstName, String surName, char role, String uniID, String userName, String password, int admin, String email) {
+	public void addUser(String userName, String firstName, String surName, int admin, String email) {
 		
-		String sqlQuery = "INSERT INTO `group20`.`users`(`id`,`fname`,`lname`,`role`,`uniID`,`username`,`password`,`admin`,`email`)" +
+		String sqlQuery = "INSERT INTO `group20`.`users`(`username`,`fname`,`lname`,`admin`,`email`)" +
 						  "VALUES(" +
-						  "null,'" +
+                                                  userName + "','" +
 						  firstName + "','" +
 						  surName + "','" +
-						  role + "','" +
-						  uniID + "','" + 
-						  userName + "','" +
-						  password + "','" +
 						  admin + "','" +
 						  email + "');";
 
-		Statement statement;
 		try {
 			statement = conn.createStatement();
 			statement.execute(sqlQuery);
@@ -66,10 +61,38 @@ public class DBManager {
 		
 	}
         
-        //wont be void, need database
         public ArrayList<Event> getEventsForUser(String user)
         {
             ArrayList<Event> events = null;
+            
+            String sqlQuery = "SELECT * FROM 'events' WHERE invitiees LIKE '%" + user + "%';";
+            
+		try {
+                        statement = null;
+			statement = (Statement) conn.createStatement();
+			ResultSet rs = statement.executeQuery(sqlQuery);
+                        
+                        while(rs.next()) {
+                            events.add(new Event(rs.getInt("id"),
+                                                rs.getString("name"),
+                                                rs.getString("description"),
+                                                rs.getInt("startdateday"), 
+                                                rs.getInt("startdatemonth"), 
+                                                rs.getInt("startdateyear"), 
+                                                rs.getInt("enddateday"), 
+                                                rs.getInt("enddatemonth"), 
+                                                rs.getInt("enddatemonth"), 
+                                                rs.getInt("startTime"), 
+                                                rs.getInt("endTime"),
+                                                rs.getString("creator"),
+                                                rs.getString("invitiees"),
+                                                rs.getString("frequency")));
+                        }
+                        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+                
             return events;
         }
         

@@ -4,9 +4,10 @@
     Author     : Paul
 --%>
 
-<%@page import="managers.TimetableManager"%>
+<%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="tm" scope="page" class="managers.TimetableManager" />
+<jsp:useBean id="dm" scope="page" class="managers.DBManager" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,9 +21,10 @@
         {
                 response.sendRedirect(".");
         }
-        
-        tm.outputTimetable(userName);
-            
+        Calendar cal = Calendar.getInstance();
+        cal.set(2012, 2, 14);
         %>
+        <%=tm.outputTimetable(userName,cal)%>
+            
     </body>
 </html>
