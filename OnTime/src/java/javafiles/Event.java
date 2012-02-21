@@ -32,7 +32,7 @@ public class Event {
 
     
     public Event(int id, String name, String description, int startDateDay, int startDateMonth, int startDateYear, int endDateDay, 
-                    int endDateMonth, int endDateYear, int startTime, int endTime, String creator, String invitiees, String frequency) {
+                    int endDateMonth, int endDateYear, int startTime, int endTime, String creator, String invitieesString, String frequency) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -47,7 +47,8 @@ public class Event {
         this.creator = creator;
         this.frequency = frequency;
         
-        String[] invites = invitiees.split(",");
+        this.invitiees = new ArrayList<String>();
+        String[] invites = invitieesString.split(",");
         for(int i=0;i<invites.length;i++)
         {
             this.invitiees.add(invites[i]);
@@ -110,5 +111,14 @@ public class Event {
     
     public String getFrequency() {
         return frequency;
+    }
+
+    public String getInviteesString() {
+        String output = "";
+        for(String s : invitiees) {
+            output += s + ",";
+        }
+        output = output.substring(0, (output.length()-2) );
+        return output;
     }
 }
