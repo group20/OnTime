@@ -16,21 +16,22 @@ public class DBManager {
 	private String db_userid;
 	private String db_password;
 
-	//public DBManager() throws FileNotFoundException, IOException {
-        public void initialise(){
-		host = ResourceStrings.DB_HOSTNAME;
-		db_userid = ResourceStrings.DB_USERNAME;
-		db_password = ResourceStrings.DB_PASSWORD;
+	public DBManager() throws FileNotFoundException, IOException {
+        //public String initialise() throws SQLException{
+		host =  "" + ResourceStrings.DB_HOSTNAME;
+		db_userid = "" + ResourceStrings.DB_USERNAME;
+		db_password = "";
 		conn = dbConnect(host, db_userid, db_password);
+                String output = "connected";
+                //return output;
         }
 	//}
 
 	public Connection dbConnect(String db_connect_string, String db_userid,
 			String db_password) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection conn = DriverManager.getConnection(db_connect_string,
-					db_userid, db_password);
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/group20", "root", "");
 
 			System.out.println("connected");
 			return conn;
@@ -44,15 +45,16 @@ public class DBManager {
 	public void addUser(String userName, String firstName, String surName, int admin, String email) {
 		
 		String sqlQuery = "INSERT INTO `group20`.`users`(`username`,`fname`,`lname`,`admin`,`email`)" +
-						  "VALUES(" +
+						  "VALUES('" +
                                                   userName + "','" +
 						  firstName + "','" +
 						  surName + "','" +
 						  admin + "','" +
 						  email + "');";
+                System.out.println(sqlQuery);
 
 		try {
-			statement = conn.createStatement();
+			statement  = (Statement) conn.createStatement();
 			statement.execute(sqlQuery);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,11 +63,28 @@ public class DBManager {
 		
 	}
         
+        public String getUserEmail(String user){
+            	String sqlQuery = "SELECT * FROM users WHERE username='"+user+"';";
+                System.out.println(sqlQuery);
+                String output = "";
+		try {
+			statement  = (Statement) conn.createStatement();
+			ResultSet rs = statement.executeQuery(sqlQuery);
+                        while(rs.next())
+                        {
+                            output += rs.getString("email");
+                        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return output;
+        }
+        
         public ArrayList<Event> getEventsForUser(String user)
         {
-            ArrayList<Event> events = null;
+            ArrayList<Event> events = new ArrayList<Event>();
             
-            String sqlQuery = "SELECT * FROM 'events' WHERE invitiees LIKE '%" + user + "%';";
+            String sqlQuery = "SELECT * FROM events WHERE invitiees LIKE '%" + user + "%';";
             
 		try {
                         statement = null;
@@ -95,6 +114,43 @@ public class DBManager {
                 
             return events;
         }
+        
+        public void addEvent(Event event)
+        {
+            String sqlQuery = "INSERT INTO `group20`.`events`"
+                    + "(`id`,`name`,`description`,"
+                    + "`startDateDay`,`startDateMonth`,`startDateYear`,"
+                    + "`endDateDay`,`endDateMonth`,`endDateYear`,"
+                    + "`starttime`,`endtime`,`creator`,`frequency`,`invitiees`)"
+                    + "VALUES('"
+                    + event.getID() + "','"
+                    + event.getName() + "','"
+                    + event.getDescription() + "','"
+                    + event.getStartDateDay() + "','"
+                    + event.getStartDateMonth() + "','"
+                    + event.getStartDateYear() + "','"
+                    + event.getEndDateDay() + "','"
+                    + event.getEndDateMonth() + "','"
+                    + event.getEndDateYear() + "','"
+                    + event.getStartTime() + "','"
+                    + event.getEndTime() + "','"
+                    + event.getCreator() + "','"
+                    + event.getFrequency() + "','"
+                    + event.getInviteesString()
+                    + "');";
+            
+		try {
+                        statement = null;
+			statement = (Statement) conn.createStatement();
+                        statement.execute(sqlQuery);
+
+                        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        }
+        
+        
         
         
 
