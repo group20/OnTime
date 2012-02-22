@@ -22,10 +22,9 @@ public class TimetableManager {
      */
     public String outputTimetable(String user, Calendar cal) throws FileNotFoundException, IOException
     {
-//        DBManager db = new DBManager();
-//        db.initialise();
-//        ArrayList<Event> events = null;//db.getEventsForUser(user);
-//        events.add(new Event(1, "name", "description", 2, 2, 2012, 2, 2, 2012, 2, 3, "me", "me,you", "monday"));
+        DBManager db = new DBManager();
+        ArrayList<Event> events = db.getEventsForUser(user);
+        
         String output = "";
         
         output += ("<div id=\"calendar\">");					
@@ -50,13 +49,13 @@ public class TimetableManager {
             output += "<div class= \"week\">";
             for(int j = 0; j < 7; j++) { //7 days
                 ArrayList<Event> todaysEvents = null;
-//                for(Event e : events)
-//                {
-//                    if(e.getStartDateDay() == currentDay && e.getStartDateMonth() == cal.MONTH && e.getStartDateYear() ==  cal.YEAR)
-//                    {
-//                        todaysEvents.add(e);
-//                    }
-//                }
+                for(Event e : events)
+                {
+                    if(e.getStartDateDay() == currentDay && e.getStartDateMonth() == cal.MONTH && e.getStartDateYear() ==  cal.YEAR)
+                    {
+                        todaysEvents.add(e);
+                    }
+                }
                 
                 if(currentDay % 7 == 0)
                 {
@@ -103,14 +102,14 @@ public class TimetableManager {
                         output += ("        <ul>");
                         int currEventStart = 0;
                         
-//                        for(Event e: eventsForToday) {
-//                            int duration = e.getEndTime() - e.getStartTime();
-//                            int startTime = e.getStartTime() - currEventStart - duration;
-//                            output += ("            <li class=\"yellow l" + duration + " a" + startTime + " \"><p>" 
-//                                                                + e.getStartTime() + ":00 " + e.getDescription() + "</p></li>");
-//                            currEventStart = e.getStartTime();
-//                            
-//                        }				
+                        for(Event e: eventsForToday) {
+                            int duration = e.getEndTime() - e.getStartTime();
+                            int startTime = e.getStartTime() - currEventStart - duration;
+                            output += ("            <li class=\"yellow l" + duration + " a" + startTime + " \"><p>" 
+                                                                + e.getStartTime() + ":00 " + e.getDescription() + "</p></li>");
+                            currEventStart = e.getStartTime();
+                            
+                        }				
                         output += ("        </ul>");
                         output += ("    </div>	");
                         output += ("    <!-- slide closed -->");
@@ -138,19 +137,18 @@ public class TimetableManager {
                         output += ("        <ul>");
                         int currEventStart = 0;
                         
-//                        for(Event e: eventsForToday) {
-//                            int duration = e.getEndTime() - e.getStartTime();
-//                            int startTime = e.getStartTime() - currEventStart - duration;
-//                            output += ("            <li class=\"yellow l" + duration + " a" + startTime + " \"><p>" 
-//                                                                + e.getStartTime() + ":00 " + e.getDescription() + "</p></li>");
-//                            currEventStart = e.getStartTime();
-//                            
-//                        }				
+                        for(Event e: eventsForToday) {
+                            int duration = e.getEndTime() - e.getStartTime();
+                            int startTime = e.getStartTime() - currEventStart - duration;
+                            output += ("            <li class=\"yellow l" + duration + " a" + startTime + " \"><p>"
+                                                    + e.getStartTime() + ":00 " + e.getName() + " - " + e.getDescription() + "</p></li>");
+                            currEventStart = e.getStartTime();
+                            
+                        }				
                         output += ("        </ul>");
                         output += ("    </div>	");
                         output += ("    <!-- slide closed -->");
                         output += ("</div>		");
                         return output;
     }
-    
 }
