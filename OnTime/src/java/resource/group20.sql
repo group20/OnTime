@@ -60,13 +60,17 @@ CREATE TABLE `events` (
   `id` int(11) NOT NULL,
   `name` text,
   `description` text,
-  `starttime` time NOT NULL,
-  `endtime` time NOT NULL,
+  `startDateDay` int(11) DEFAULT NULL,
+  `startDateMonth` int(11) DEFAULT NULL,
+  `startDateYear` int(11) DEFAULT NULL,
+  `endDateDay` int(11) DEFAULT NULL,
+  `endDateMonth` int(11) DEFAULT NULL,
+  `endDateYear` int(11) DEFAULT NULL,
+  `starttime` int(11) NOT NULL,
+  `endtime` int(11) NOT NULL,
   `creator` varchar(45) NOT NULL COMMENT 'True if this user is the creator of the event',
-  `startdate` date DEFAULT NULL,
-  `enddate` date DEFAULT NULL,
-  `invitiees` text,
   `frequency` varchar(45) DEFAULT NULL,
+  `invitiees` text,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -81,4 +85,4 @@ CREATE TABLE `events` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-02-20 17:30:31
+-- Dump completed on 2012-02-22 17:35:26
