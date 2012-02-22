@@ -48,7 +48,7 @@ public class TimetableManager {
         for(int i=0; i<5; i++) {//for 5 weeks
             output += "<div class= \"week\">";
             for(int j = 0; j < 7; j++) { //7 days
-                ArrayList<Event> todaysEvents = null;
+                ArrayList<Event> todaysEvents = new ArrayList<Event>(); 
                 for(Event e : events)
                 {
                     if(e.getStartDateDay() == currentDay && e.getStartDateMonth() == cal.MONTH && e.getStartDateYear() ==  cal.YEAR)
