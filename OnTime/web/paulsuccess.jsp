@@ -10,8 +10,27 @@ notes: Must create function to highlight the current day (.today)
 <%@ page contentType="text/html; charset=iso-8859-1" language="java"%>
 <%@page session="true" import="java.util.*" %>
 <jsp:useBean id="tm" scope="page" class="managers.TimetableManager" />
+<%@ page import="javafiles.Event" %>
 
 <%
+int id = 0;
+String name = null;
+String description = null;
+int startDateDay = 0;
+int startDateMonth= 0;
+int startDateYear = 0;
+int endDateDay=0;
+int endDateMonth = 0;
+int endDateYear = 0;
+int startTime = 0;
+int endTime = 0;
+String creator= null;
+String invitieesString = null;
+String frequency = null;
+
+Event event = new Event(id, name, description, startDateDay, startDateMonth, startDateYear, endDateDay, 
+                    endDateMonth, endDateYear, startTime, endTime, creator, invitieesString, frequency);
+
     /*
      * String userName = null; //TODO: possibly more secure using try catch? try
      * {
