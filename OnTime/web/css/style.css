@@ -8,6 +8,10 @@ body
     font-family:Arial, Helvetica, sans-serif;
     color:#7f7f7f;
 }
+header img#logo {
+    height:200px;
+    width:400px;
+}
 a{
     text-decoration:none;
     color:white;
@@ -25,20 +29,16 @@ form {
     color : white;
     height: 170px;
     position:fixed; top:50%; left:50%; margin-top:-125px; margin-left:-200px;
-
-    /*** Adding in CSS3 ***/
-
     /*** Rounded Corners ***/
-    -moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-
+    border-radius:20px;
+    -moz-border-radius:20px; /* Firefox 3.6 and earlier */
+    background: url(../images/signin.png);
+    background-position: -5px 219px;
     /*** Background Gradient - 2 declarations one for Firefox and one for Webkit ***/
-    background:  -moz-linear-gradient(19% 75% 90deg,#0177a9, #53c3e8);
+    background:-moz-linear-gradient(19% 75% 90deg,#0177a9, #53c3e8);
     background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#53c3e8), to(#0177a9));
-
     /*** Shadow behind the box ***/
-    -moz-box-shadow:0px -5px 15px #00aaff;
-    -webkit-box-shadow:0px -5px 15px #00aaff;
+    box-shadow: 0px -5px 15px #00aaff;;
 }
 
 h2 {
