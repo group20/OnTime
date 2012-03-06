@@ -32,6 +32,9 @@
         <%        } else {%>
     <body onload="shake()">
         <%            }%>
+        <header>
+            <img src="images/logo_onTime.png" alt="onTime" id="logo"/>
+        </header>
         <form id="login" method="post" action="sessionAction.jsp"> 
             <h2>Sign in to your account</h2>
             <input type="text" name="username" tabindex="1" placeholder="Username" required>
