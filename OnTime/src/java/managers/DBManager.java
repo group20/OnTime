@@ -9,7 +9,7 @@ import javafiles.Event;
 import resource.ResourceStrings;
 
 public class DBManager {
-//this is a comment
+
 	private Connection conn;
         private Statement statement;
 	private String host;
