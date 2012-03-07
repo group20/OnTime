@@ -13,33 +13,6 @@ notes: Must create function to highlight the current day (.today)
 <%@ page import="javafiles.Event" %>
 
 <%
-int id = 0;
-String name = null;
-String description = null;
-int startDateDay = 0;
-int startDateMonth= 0;
-int startDateYear = 0;
-int endDateDay=0;
-int endDateMonth = 0;
-int endDateYear = 0;
-int startTime = 0;
-int endTime = 0;
-String creator= null;
-String invitieesString = null;
-String frequency = null;
-
-Event event = new Event(id, name, description, startDateDay, startDateMonth, startDateYear, endDateDay, 
-                    endDateMonth, endDateYear, startTime, endTime, creator, invitieesString, frequency);
-
-    /*
-     * String userName = null; //TODO: possibly more secure using try catch? try
-     * {
-     *
-     *
-     * } catch (Exception e) { } if (userName == null) {
-     *
-     * }
-     */
     String userName = (String) session.getAttribute("sessUserName");
     if (userName == null) {
         response.sendRedirect(".");
@@ -101,10 +74,11 @@ Event event = new Event(id, name, description, startDateDay, startDateMonth, sta
                 out.print("UserName : " + session.getAttribute("sessUserName"));
             %>
             <p><a href="logout.jsp">Logout</a></p>
+            <a href="addevent.jsp"><h3>Add Event</h3></a>
         </div>
             
             <%=tm.outputTimetable(userName,cal)%>
-
+            
         
 </body>
 <footer>A Team 20 Project.</footer>

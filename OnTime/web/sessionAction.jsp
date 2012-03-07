@@ -5,17 +5,24 @@
 --%>
 
 <%@page import="java.util.*" %>
+<%@page import="managers.DBManager" %>
 <jsp:useBean id="validator" scope="session" class="javafiles.validator" />
 
 <%
     String userid = request.getParameter("username");
     String password = request.getParameter("password");
     String message = "User login successful";
+    DBManager db = new DBManager();
 
     if (validator.valid(userid, password)) {
 
-        session.setAttribute("sessUserName", request.getParameter("username"));
-        pageContext.forward("success.jsp?details=" + message);
+        session.setAttribute("sessUserName", userid);
+      if(!db.containsUser(userid))
+      {
+            pageContext.forward("firstlogin.jsp");
+      } else {
+        pageContext.forward("paulsuccess.jsp?details=" + message);
+       }
     } else {
 
         String error = "Incorect password or username ";

@@ -11,15 +11,7 @@ notes: Must create function to highlight the current day (.today)
 <%@page session="true" import="java.util.*" %>
 
 <%
-    /*
-     * String userName = null; //TODO: possibly more secure using try catch? try
-     * {
-     *
-     *
-     * } catch (Exception e) { } if (userName == null) {
-     *
-     * }
-     */
+
     String userName = (String) session.getAttribute("sessUserName");
     if (userName == null) {
         response.sendRedirect(".");
