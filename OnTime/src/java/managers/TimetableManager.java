@@ -26,7 +26,6 @@ public class TimetableManager {
         ArrayList<Event> events = db.getEventsForUser(user);
         String output = "";
         
-        //Output last days of previous month:
         Calendar cal2 = cal;
         cal2.set(cal.get(cal.YEAR),cal.get(cal.MONTH),1);
         cal2.setFirstDayOfWeek(Calendar.MONDAY);
