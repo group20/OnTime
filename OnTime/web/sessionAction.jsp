@@ -21,11 +21,11 @@
       {
             pageContext.forward("firstlogin.jsp");
       } else {
-        pageContext.forward("paulsuccess.jsp?details=" + message);
+        pageContext.forward("timetable.jsp?details=" + message);
        }
     } else {
 
-        String error = "Incorect password or username ";
+        String error = "Incorrect password or username ";
         pageContext.forward(".?details2=" + error);
         boolean test = false;
     }
