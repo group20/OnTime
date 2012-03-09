@@ -12,7 +12,6 @@ public class TimetableManager {
     {
 
     }
-    
     /**
      * Outputs a timetable for a week for a given user
      * Times will be stored in the db as integers eg period 1,2,3 etc
@@ -22,65 +21,48 @@ public class TimetableManager {
      */
     public String outputTimetable(String user, Calendar cal) throws FileNotFoundException, IOException
     {
+
         DBManager db = new DBManager();
         ArrayList<Event> events = db.getEventsForUser(user);
-        
         String output = "";
         
-        output += ("<div id=\"calendar\">");					
-        output += ("    <div id=\"calcontainer\">");
-        output += ("        <div id=\"calheader\">");
-        output += ("            <h2>" + cal.MONTH + " " + cal.YEAR + "</h2>");
-        output += ("        </div>		");
-        output += ("        <div id=\"daysweek\">");
-        output += ("            <div class=\"dayweek\"><p>Monday</p></div>");
-        output += ("            <div class=\"dayweek\"><p>Tuesday</p></div>");
-        output += ("            <div class=\"dayweek\"><p>Wednesday</p></div>");
-        output += ("            <div class=\"dayweek\"><p>Thursday</p></div>");
-        output += ("            <div class=\"dayweek\"><p>Friday</p></div>");
-        output += ("            <div class=\"dayweek\"><p>Saturday</p></div>");
-        output += ("            <div class=\"dayweek brn\"><p>Sunday</p></div>");
-        output += ("        </div>");
-        output += ("        <div id=\"daysmonth\">");
+        Calendar cal2 = cal;
+        cal2.set(cal.get(cal.YEAR),cal.get(cal.MONTH),1);
+        cal2.setFirstDayOfWeek(Calendar.MONDAY);
+        int lastMonthCount = cal2.get(cal2.DAY_OF_WEEK) - 2;
+        if(lastMonthCount < 0) lastMonthCount = 6;
+        cal2.add(Calendar.DAY_OF_MONTH,-lastMonthCount);
         
-        int currentDay = 1;//first monday
         
-        for(int i=0; i<5; i++) {//for 5 weeks
-            output += "<div class= \"week\">";
-            for(int j = 0; j < 7; j++) { //7 days
-                ArrayList<Event> todaysEvents = new ArrayList<Event>(); 
+        int dayCount = 1;
+        for(int i=0; i<42; i++) {
+            ArrayList<Event> todaysEvents = new ArrayList<Event>();
                 for(Event e : events)
                 {
-                    if(e.getStartDateDay() == currentDay && e.getStartDateMonth() == cal.MONTH && e.getStartDateYear() ==  cal.YEAR)
+                    if(e.getStartDateDay() == cal2.get(Calendar.DAY_OF_MONTH) && e.getStartDateMonth() == cal2.get(Calendar.MONTH)+1 && e.getStartDateYear() ==  cal2.get(Calendar.YEAR))
                     {
                         todaysEvents.add(e);
                     }
                 }
-                
-                if(currentDay % 7 == 0)
+                if(dayCount == 7)
                 {
-                    output += outputDayBrn(currentDay, todaysEvents);
-                } else {
-                    output += outputDay(currentDay, todaysEvents);
+                    output += outputDayBrn(cal2.get(Calendar.DAY_OF_MONTH), todaysEvents);
+                    dayCount = 0;
+                    output += "</div>";
+                    if(i != 41)
+                    {
+                        output += "<div class=\"week\">";
+                    }
+                    
                 }
-                currentDay++;
-            }
-            output += ("    </div>");
+                else
+                {
+                    output += outputDay(cal2.get(Calendar.DAY_OF_MONTH), todaysEvents);
+                }
+                cal2.add(Calendar.DAY_OF_MONTH,1);
+                dayCount++;
         }
-        
-        output += ("                </div>");
-        output += ("    </div>");			
-        output += ("    <div id=\"calcat\">");
-        output += ("        <div class=\"caldot blue\"></div><p>Lecture</p>");
-        output += ("        <div class=\"caldot yellow\"></div><p>Tutorial</p>");
-        output += ("        <div class=\"caldot green\"></div><p>Student Meeting</p>");
-        output += ("        <div class=\"caldot red\"></div><p>Lecturer Meeting</p>");
-        output += ("    </div>");
-        output += ("</div>");
-        output += ("</div>");
-        
         return output;
-        
     }
     
     private String outputDay(int dayNumber, ArrayList<Event> eventsForToday ) {
@@ -90,10 +72,10 @@ public class TimetableManager {
                         output += ("    <div class=\"dots\">");
                         output += ("        <ul>");
                         //******************************************************************
-                        
-                        //output += ("            <li class=\"yellow\"></li>"); TODO: need to add entry to 
+                        for(Event e: eventsForToday) {
+                            output += ("            <li class=\"red\"></li>");            //TODO: need to add entry to 
                         //output += ("            <li class=\"green\"></li>");        db for types of events
-                        
+                        }
                         //***************************************************************88
                         output += ("        </ul>");
                         output += ("    </div>	");
@@ -113,7 +95,7 @@ public class TimetableManager {
                         output += ("        </ul>");
                         output += ("    </div>	");
                         output += ("    <!-- slide closed -->");
-                        output += ("</div>		");
+                        output += ("</div>");
                         
                  return output;
     }
@@ -148,7 +130,7 @@ public class TimetableManager {
                         output += ("        </ul>");
                         output += ("    </div>	");
                         output += ("    <!-- slide closed -->");
-                        output += ("</div>		");
+                        output += ("</div>");
                         return output;
     }
 }

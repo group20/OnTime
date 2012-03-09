@@ -12,7 +12,6 @@ import java.util.ArrayList;
  */
 public class Event {
     
-    private int id;
     private String name;
     private String description;
     
@@ -31,17 +30,22 @@ public class Event {
     private String frequency;
 
     
-    public Event(int id, String name, String description, int startDateDay, int startDateMonth, int startDateYear, int endDateDay, 
-                    int endDateMonth, int endDateYear, int startTime, int endTime, String creator, String invitieesString, String frequency) {
-        this.id = id;
+    public Event(String name, String description, String startDate, String endDate, int startTime, 
+                        int endTime, String creator, String invitieesString, String frequency) {
+
         this.name = name;
         this.description = description;
-        this.startDateDay = startDateDay;
-        this.startDateMonth = startDateMonth;
-        this.startDateYear = startDateYear;
-        this.endDateDay = endDateDay;
-        this.endDateMonth = endDateMonth;
-        this.endDateYear = endDateYear;
+        
+        String[] startDates = startDate.split("/");
+        this.startDateDay = Integer.parseInt(startDates[0]);
+        this.startDateMonth = Integer.parseInt(startDates[1]);
+        this.startDateYear = Integer.parseInt(startDates[2]);
+        
+        String[] endDates = endDate.split("/");
+        this.endDateDay = Integer.parseInt(endDates[0]);
+        this.endDateMonth = Integer.parseInt(endDates[1]);
+        this.endDateYear = Integer.parseInt(endDates[2]);
+        
         this.startTime = startTime;
         this.endTime = endTime;
         this.creator = creator;
@@ -54,10 +58,6 @@ public class Event {
             this.invitiees.add(invites[i]);
         }
 
-    }
-    
-    public int getID(){
-        return id;
     }
     
     public String getName() {
