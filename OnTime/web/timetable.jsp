@@ -92,7 +92,6 @@ notes: Must create function to highlight the current day (.today)
                 </div>
                 <div id="daysmonth">
                <div class="week">
-                   
             <%=tm.outputTimetable(userName,cal)%>
             </div>				
             </div>					
@@ -103,8 +102,7 @@ notes: Must create function to highlight the current day (.today)
                 <div class="caldot red"></div><p>Lecturer Meeting</p>
             </div>				
         </div>	
-    </div>
-        
+    </div>   
 </body>
 <footer>A Team 20 Project.</footer>
 </html>
