@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/style.css?v=1.0">
-        <title>JSP Page</title>
+        <title>Group 20</title>
     </head>
     <body>
         <h1>Welcome to OnTime!</h1>

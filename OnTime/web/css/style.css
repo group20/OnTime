@@ -41,6 +41,24 @@ form {
     box-shadow: 0px -5px 15px #00aaff;;
 }
 
+#addevent{
+     width: 350px;
+    padding: 20px;
+    border: 1px solid #0088c3;
+    color : white;
+    height: 400px;
+    position:fixed; top:50%; left:50%; margin-top:-125px; margin-left:-200px;
+    /*** Rounded Corners ***/
+    border-radius:20px;
+    -moz-border-radius:20px; /* Firefox 3.6 and earlier */
+
+    /*** Background Gradient - 2 declarations one for Firefox and one for Webkit ***/
+    background:-moz-linear-gradient(19% 75% 90deg,#0177a9, #53c3e8);
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#53c3e8), to(#0177a9));
+    /*** Shadow behind the box ***/
+    box-shadow: 0px -5px 15px #00aaff;;   
+}
+
 h2 {
     font-size:25px;
     margin:0;
