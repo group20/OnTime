@@ -15,7 +15,7 @@
     <body>
         <h1>Welcome to OnTime!</h1>
         <p>As this is your first time logging in, we will need you to fill out a few details!</p>
-         <form id="login" method="post" action="addNewUser.jsp"> 
+         <form id="firsttime" method="post" action="addNewUser.jsp"> 
             <h2>Create your account</h2>
             <input type="text" name="firstname" tabindex="1" placeholder="First name" required>
             <input type="text" name="surname" tabindex="2" placeholder="Surname" required>

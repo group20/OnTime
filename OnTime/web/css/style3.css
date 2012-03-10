@@ -1,53 +1,10 @@
-/**************************** CSS Reset  ****************************/
-div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}
-ol,ul{list-style:none;}
-
-body 
-{ 
-    background:url(../images/bg.png) repeat;
-    font-family:Arial, Helvetica, sans-serif;
-    color:#7f7f7f;
-}
-header img#logo {
-    height:200px;
-    width:400px;
-}
-a{
-    text-decoration:none;
-    color:white;
-}
-
-a:hover {
-    text-decoration: underline;
-    color: black;
-}
-
-#login {
-    width: 350px;
-    padding: 20px;
-    border: 1px solid #0088c3;
-    color : white;
-    height: 170px;
-    position:fixed; top:50%; left:50%; margin-top:-125px; margin-left:-200px;
-    /*** Rounded Corners ***/
-    border-radius:20px;
-    -moz-border-radius:20px; /* Firefox 3.6 and earlier */
-    background: url(../images/signin.png);
-    background-position: -5px 219px;
-    /*** Background Gradient - 2 declarations one for Firefox and one for Webkit ***/
-    background:-moz-linear-gradient(19% 75% 90deg,#0177a9, #53c3e8);
-    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#53c3e8), to(#0177a9));
-    /*** Shadow behind the box ***/
-    box-shadow: 0px -5px 15px #00aaff;;
-}
-
-#firsttime{
+#firsttime3{
      width: 350px;
     padding: 20px;
     border: 1px solid #0088c3;
     color : white;
-    height: 200px;
-    position:fixed; top:50%; left:50%; margin-top:-125px; margin-left:-200px;
+    height: 180px;
+    position:relative;
     /*** Rounded Corners ***/
     border-radius:20px;
     -moz-border-radius:20px; /* Firefox 3.6 and earlier */
@@ -59,30 +16,105 @@ a:hover {
     box-shadow: 0px -5px 15px #00aaff;;   
 }
 
-h2 {
-    font-size:25px;
-    margin:0;
-    padding:0 0 10px 0;
-    font-weight:bold;
-    outline:none;
+#addevent{
+     width: 350px;
+    padding: 20px;
+    border: 1px solid #0088c3;
+    color : white;
+    height: 350px;
+    position: relative;
+    /*** Rounded Corners ***/
+    border-radius:20px;
+    -moz-border-radius:20px; /* Firefox 3.6 and earlier */
+
+    /*** Background Gradient - 2 declarations one for Firefox and one for Webkit ***/
+    background:-moz-linear-gradient(19% 75% 90deg,#0177a9, #53c3e8);
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#53c3e8), to(#0177a9));
+    /*** Shadow behind the box ***/
+    box-shadow: 0px -5px 15px #00aaff;;   
 }
 
-h3 {
-    margin:0;
-    padding:0 0 10px 0;
-    font-weight:bold;
-    text-decoration: underline;
-    float:left;
-    font-size:10px;
+ul{
+	margin:0;
+	padding:0;
 }
 
-h4 {
-    margin:0;
-    padding:0 0 10px 0;
-    font-weight:bold;
-    outline:none;
-    float:left;
-    font-size:9px;
+ul.container{
+	/* The topmost UL */
+	width:450px;
+	margin:0 auto;
+	padding:50px;
+}
+
+li{
+	list-style:none;
+	text-align:left;
+}
+
+li.menu{
+	/* The main list elements */
+	padding:5px 0;
+	width:100%;
+}
+
+li.button a{
+	/* The section titles */
+	display:block;
+	font-family:BPreplay,Arial,Helvetica,sans-serif;
+	font-size:21px;
+	height:34px;
+	overflow:hidden;
+	padding:10px 20px 0;
+	position:relative;
+	width:200px;
+}
+
+li.button a:hover{
+	/* Removing the inherited underline from the titles */
+	text-decoration:none;
+}
+
+li.button a span{
+	/* This span acts as the right part of the section's background */
+	height:44px;
+	position:absolute;
+	right:0;
+	top:0;
+	width:4px;
+	display:block;
+}
+
+/* Setting up different styles for each section color */
+
+li.button a.blue{background:url(../images/blue.png) repeat-x top left; color:#074384;}
+li.button a.blue span{ background:url(../images/blue.png) repeat-x top right;}
+
+li.button a.green{background:url(../images/green.png) repeat-x top left; color:#436800;}
+li.button a.green span{ background:url(../images/green.png) repeat-x top right;}
+
+li.button a.orange{background:url(../images/orange.png) repeat-x top left; color:#882e02;}
+li.button a.orange span{ background:url(../images/orange.png) repeat-x top right;}
+
+li.button a.red{background:url(../images/red.png) repeat-x top left; color:#641603;}
+li.button a.red span{ background:url(../images/red.png) repeat-x top right;}
+
+/* The hover effects */
+
+li.button a:hover{ background-position:bottom left;}
+li.button a:hover span{ background-position:bottom right;}
+
+.dropdown{
+	/* The expandable lists */
+	display:none;
+	padding-top:5px;
+	width:100%;
+}
+
+.dropdown li{
+	/* Each element in the expandable list */
+
+	margin:5px 0;
+	padding:4px 18px;
 }
 
 input {
@@ -174,18 +206,3 @@ input.submit:active {
     -ms-box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4);
     -o-box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4);
     box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4); }
-
-#welcome{
-    top:10px;
-    float:left;
-    color:white;
-}
-
-footer{
-    color: white;
-    font-size: 10px;
-    bottom:0; left:50%;
-    position:fixed;
-    opacity:.9;
-    font-family: Arial, Helvetica, sans-serif;
-}
