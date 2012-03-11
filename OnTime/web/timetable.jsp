@@ -22,6 +22,7 @@ notes: Must create function to highlight the current day (.today)
 <%
     // get the current year/month/day
     Calendar cal = Calendar.getInstance();
+   
     int currentYearInt = cal.get(Calendar.YEAR);
     int currentMonthInt = cal.get(Calendar.MONTH);
     int currentDayInt = cal.get(Calendar.DATE);
@@ -73,6 +74,8 @@ notes: Must create function to highlight the current day (.today)
         nextMonth = 0;
         nextYear++;
     }
+    
+    cal.set(currentMonthInt, intMonth);
 %>
 
 <!doctype html>
