@@ -114,7 +114,6 @@ notes: Must create function to highlight the current day (.today)
              <p>You have successfully logged into Team 20's Timetable System</p>
             <%
                 out.print("UserName : " + session.getAttribute("sessUserName"));
-                out.print("currentMonthString : " + currentMonthString);
             %>
             <p><a href="logout.jsp">Logout</a></p>
             <ul class="container">
@@ -219,9 +218,7 @@ notes: Must create function to highlight the current day (.today)
 
 </ul>
 </div>
-
-<div id="calendar">	
-    <table id="calendar_nav_table">
+ <table id="calendar_nav_table">
         <tr>
             <td id="prev_link">
                 <form method="post" id="selecttable">
@@ -246,6 +243,7 @@ notes: Must create function to highlight the current day (.today)
             </td>
         </tr>
     </table>
+<div id="calendar">	
     <div id="calcontainer">
         <div id="calheader">
             <h2><%=monthName + " " + intYear%></h2>
