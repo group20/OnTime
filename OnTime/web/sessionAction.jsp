@@ -21,7 +21,7 @@
       {
             pageContext.forward("firstlogin.jsp");
       } else {
-        pageContext.forward("timetable.jsp?details=" + message);
+    response.sendRedirect("timetable.jsp");
        }
     } else {
 

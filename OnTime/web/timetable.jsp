@@ -4,7 +4,7 @@
     Author     : Donnchadh
 
 notes: Must create function to highlight the current day (.today)
-       Must create function to make the current week bigger (.big)
+       Must create function to make the current week bigger (.big) testingg
 --%>
 
 <%@ page contentType="text/html; charset=iso-8859-1" language="java"%>
@@ -61,8 +61,6 @@ notes: Must create function to highlight the current day (.today)
     String monthName = monthNames[intMonth];
 
     // determine the next/previous month and year.
-    // this is really only needed by calendar.jsp, but i moved it here
-    // to simplify calendar.jsp.
     int nextYear = intYear;
     int prevYear = intYear;
     int prevMonth = intMonth - 1;
