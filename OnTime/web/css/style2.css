@@ -11,114 +11,120 @@ table{border-collapse:collapse;border-spacing:0;}
 
 /**************************** Calendar ****************************/
 #calendar{
-	margin: 0 auto;
-	padding-top: 25px;
-	width: 760px;
-	text-align: center;
-  	position: relative;
+    margin: 0 auto;
+    padding-top: 25px;
+    width: 760px;
+    text-align: center;
+    position: relative;
+}
+
+#calendar_nav_table{
+    top:0px;
+    width:460px;
+    position:absolute;
 }
 
 #calheader{
-	width:100%;
-	height:30px;
-	text-align:center;
+    width:100%;
+    height:30px;
+    text-align:center;
 }
 #calheader h2{
-	margin-top:15px;
+    margin-top:15px;
 }
 #calcontainer{
-	float:left;
-	margin-bottom:10px;
-        background:#fff;
-        border-radius:25px;
+    float:left;
+    margin-bottom:10px;
+    background:#fff;
+    border-radius:25px;
 }
 #daysmonth{
-	clear:both;
+    clear:both;
 }
 .dayweek{
-	width:107px;
-	height:30px;
-	float:left;
-	border-right:1px solid #e5e5e5;
+    width:107px;
+    height:30px;
+    float:left;
+    border-right:1px solid #e5e5e5;
 }
 .dayweek p{
-	display:block;
-	font-size:10px;
-	line-height:31px;
-	text-shadow:0 1px 0 #ffffff;
+    display:block;
+    font-size:10px;
+    line-height:31px;
+    text-shadow:0 1px 0 #ffffff;
 }
 .week{
-	overflow:auto;
-	border-top:1px solid #c2c2c2;
+    overflow:auto;
+    border-top:1px solid #c2c2c2;
 }
 .weeku{
-	overflow:auto;
-	border-top:1px solid #c2c2c2;
-	border-bottom:1px solid #e5e5e5;
+    overflow:auto;
+    border-top:1px solid #c2c2c2;
+    border-bottom:1px solid #e5e5e5;
 }
 .today{
-	background:#fffcdf;
-	border-right:1px solid #e5e5e5;
+    background:#fffcdf;
+    border-right:1px solid #e5e5e5;
 }
 .today .daybar{
-	background:#fffac1;
+    background:#fffac1;
 }
 .day{
-	width:107px;
-	float:left;
-	border-right:1px solid #e5e5e5;
-        border-radius:25px;
+    width:107px;
+    float:left;
+    border-right:1px solid #e5e5e5;
+    border-radius:25px;
 }
 .brn{
-	border-right:none;
+    border-right:none;
 }
 .bun{
-	border-bottom:none;
+    border-bottom:none;
 }
 .day:hover{
-	background:#e9f0f8;
-	cursor:pointer;
+    background:#e9f0f8;
+    cursor:pointer;
 }
 .daybar{
-	width:100%;float:left;
-	background:#f3f3f3;
+    width:100%;float:left;
+    background:#f3f3f3;
 }
 .daybar p{
-	margin-left:5px;
-	margin-top:3px;
-	margin-bottom:3px;
-	font-size:10px;
-	font-weight:400;
-	color:#969696;
-	text-shadow:0 1px 0 #ffffff;
+    margin-left:5px;
+    margin-top:3px;
+    margin-bottom:3px;
+    font-size:10px;
+    font-weight:400;
+    color:#969696;
+    text-shadow:0 1px 0 #ffffff;
 }
 .dots{
-	width:100%;
-	height:35px;
-	clear:both;
+    width:100%;
+    height:35px;
+    clear:both;
 }
 .dots ul{
-	text-align:center;
-	white-space:nowrap;
-	overflow:hidden;
+    text-align:center;
+    white-space:nowrap;
+    overflow:hidden;
 }
 .dots ul li{
-	margin-top:10px;
-	display:inline-block;
-	-webkit-border-radius:14px;width:12px;height:12px;
+    margin-top:10px;
+    display:inline-block;
+    -webkit-border-radius:14px;width:12px;height:12px;
 }
 .big{
-	width:107px;
-	float:left;
+    width:107px;
+    float:left;
 }
 .big:hover{
-	background:#e9f0f8;cursor:pointer;
+    background:#e9f0f8;cursor:pointer;
 }
 .big .dots{
-	height:65px;
+    height:65px;
 }
 .big .dots li{
-	margin-top:25px;
+    margin-top:25px;
 }
 
 /**************************** Events when slide is open ****************************/
@@ -195,3 +201,31 @@ table{border-collapse:collapse;border-spacing:0;}
 #calcat{float:right;margin-bottom:20px;margin-right:5px;}
 #calcat p{margin-top:4px;float:left; color:white;}
 .caldot{float:left;width:12px;height:12px;border-radius:20px;margin-left:10px;margin-top:4px;margin-right:8px;}
+#calendar_nav_table{
+    left:40px;
+    top:25px;
+}
+#navInputMid{
+    width:100px;
+    position:absolute;
+}
+#navInputLeft{
+    background:url(../images/arrowleft.png) no-repeat;
+    display:block;
+    width:24px;
+    height:42px;
+    text-indent:-9999px;
+    border:0;
+    left:120px;
+    position:absolute;
+}
+#navInputRight{
+    background:url(../images/arrowright.png) no-repeat;
+    display:block;
+    width:24px;
+    height:42px;
+    text-indent:-9999px;
+    border:0;
+    left:265px;
+    position:absolute;
+}
