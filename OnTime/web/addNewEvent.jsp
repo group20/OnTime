@@ -19,5 +19,5 @@
                                request.getParameter("frequency"));
     DBManager db = new DBManager();
     db.addEvent(newEvent);
-    pageContext.forward("timetable.jsp");
+    response.sendRedirect("timetable.jsp");
 %>

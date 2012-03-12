@@ -14,7 +14,7 @@ public class validator {
 // Version 1.0
 
 private String popHosts;
-private boolean debugOn = false;
+private boolean debugOn = true;
 
 public validator() 
 {

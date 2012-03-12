@@ -239,7 +239,11 @@ notes: Must create function to highlight the current day (.today)
         </div>
         <div id="daysmonth">
             <div class="week">
-                <%=tm.outputTimetable(cal,events)%>
+                <%String[] users = new String[2];
+                    users[0]="pmg3";
+                    users[1]="ctml1";%>
+                <%=tm.outputFreeSlots(users,cal)%>
+                <%//=tm.outputTimetable(cal, events)%>
             </div>				
         </div>					
         <div id="calcat">

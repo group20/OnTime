@@ -145,15 +145,8 @@ public class TimetableManager {
         if(lastMonthCount < 0) lastMonthCount = 6;
         cal.add(Calendar.DAY_OF_MONTH,-lastMonthCount);
        ArrayList<Event> resultEvents = new ArrayList<Event>();
-       
-       Map<String,ArrayList<Event>> eventsForUsers = new HashMap<String,ArrayList<Event>>();
-       for(String user: users) {
-           ArrayList<Event> events = db.getEventsForUser(user);
-           if(!eventsForUsers.containsValue(events))
-           {
-                eventsForUsers.put(user, events);
-           }
-       }
+       ArrayList<Event> events = db.getEventsForUsers(users);
+           
        for(int i = 0; i < 42; i++) {
            int count = 0;
            int currYear = cal.get(cal.YEAR);
@@ -162,20 +155,16 @@ public class TimetableManager {
            String currDate = "" + currDay + "/" + currMonth + "/" + currYear;
            //for each period between 8am and 8pm
            for(int j=8; j<20; j++) {
-               for(Map.Entry<String,ArrayList<Event>> entry: eventsForUsers.entrySet())  {
-                   String user = entry.getKey();
-                   ArrayList<Event> events = entry.getValue();
-                   for(Event e : events)
-                   {
-                        if(e.getStartDateDay() == cal.get(Calendar.DAY_OF_MONTH) && e.getStartDateMonth() == cal.get(Calendar.MONTH)+1 && e.getStartDateYear() ==  cal.get(Calendar.YEAR) && e.getStartTime() == j)
-                        {
-                            count++;
-                        }
-                        
-                   }
-               }
+                for(Event e : events)
+                {
+                    if(e.getStartDateDay() == cal.get(Calendar.DAY_OF_MONTH) && e.getStartDateMonth() == cal.get(Calendar.MONTH)+1 && e.getStartDateYear() ==  cal.get(Calendar.YEAR) && e.getStartTime() == j)
+                    {
+                        count++;
+                    }
+
+                }
                //now add the results for this period to the list of events
-               resultEvents.add(new Event("", ""+count,
+               resultEvents.add(new Event(0,"", ""+count,
                                         currDate, currDate, j, j+1, "", "", ""));
                count = 0;
            }

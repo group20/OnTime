@@ -8,8 +8,11 @@ import resource.ResourceStrings;
 public class LoginManager {
 
 	public static void main(String[]args) throws FileNotFoundException, IOException, SQLException{
-		System.out.println(ResourceStrings.DB_HOSTNAME);
-                System.out.println(ResourceStrings.DB_PASSWORD);
-                System.out.println(ResourceStrings.DB_USERNAME);
+		DBManager db = new DBManager();
+                String[] users = new String[2];
+                users[0] = "pmg3";
+                users[1] = "ctml1";
+                db.getEventsForUsers(users);
+                System.out.println();
 	}
 }

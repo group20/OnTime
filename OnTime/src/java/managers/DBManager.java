@@ -31,7 +31,7 @@ public class DBManager {
 			String db_password) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/group20", "root", "");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/group20", "root", "password");
 
 			System.out.println("connected");
 			return conn;
@@ -92,7 +92,48 @@ public class DBManager {
 			ResultSet rs = statement.executeQuery(sqlQuery);
                         
                         while(rs.next()) {
-                            events.add(new Event(rs.getString("name"),
+                            events.add(new Event(
+                                                rs.getInt("id"),
+                                                rs.getString("name"),
+                                                rs.getString("description"),
+                                                "" + rs.getInt("startdateday") + "/" + rs.getInt("startdatemonth") + "/" + rs.getInt("startdateyear"), 
+                                                "" + rs.getInt("enddateday") + "/" + rs.getInt("enddatemonth") + "/" + rs.getInt("enddatemonth"), 
+                                                rs.getInt("startTime"), 
+                                                rs.getInt("endTime"),
+                                                rs.getString("creator"),
+                                                rs.getString("invitiees"),
+                                                rs.getString("frequency")));
+                        }
+                        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+                
+            return events;
+        }
+        
+        public ArrayList<Event> getEventsForUsers(String[] users)
+        {
+            ArrayList<Event> events = new ArrayList<Event>();
+            
+            String sqlQuery = "SELECT * FROM events WHERE ";
+            for(String user:users) {
+                sqlQuery += "invitiees LIKE '%" + user + "%' OR ";
+            }
+            
+             sqlQuery = sqlQuery.substring(0, sqlQuery.length()- 3);
+             
+             sqlQuery += " ORDER BY startDateDay,startDateMonth,startDateYear;";
+            
+		try {
+                        statement = null;
+			statement = (Statement) conn.createStatement();
+			ResultSet rs = statement.executeQuery(sqlQuery);
+                        
+                        while(rs.next()) {
+                            events.add(new Event(
+                                                rs.getInt("id"),
+                                                rs.getString("name"),
                                                 rs.getString("description"),
                                                 "" + rs.getInt("startdateday") + "/" + rs.getInt("startdatemonth") + "/" + rs.getInt("startdateyear"), 
                                                 "" + rs.getInt("enddateday") + "/" + rs.getInt("enddatemonth") + "/" + rs.getInt("enddatemonth"), 
@@ -113,11 +154,11 @@ public class DBManager {
         public void addEvent(Event event)
         {
             String sqlQuery = "INSERT INTO `group20`.`events`"
-                    + "(`name`,`description`,"
+                    + "(`id`,`name`,`description`,"
                     + "`startDateDay`,`startDateMonth`,`startDateYear`,"
                     + "`endDateDay`,`endDateMonth`,`endDateYear`,"
                     + "`starttime`,`endtime`,`creator`,`frequency`,`invitiees`)"
-                    + "VALUES('"
+                    + "VALUES(null,'"
                     + event.getName() + "','"
                     + event.getDescription() + "','"
                     + event.getStartDateDay() + "','"

@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class Event {
     
+    private int id;
     private String name;
     private String description;
     
@@ -30,9 +31,9 @@ public class Event {
     private String frequency;
 
     
-    public Event(String name, String description, String startDate, String endDate, int startTime, 
+    public Event(int id, String name, String description, String startDate, String endDate, int startTime, 
                         int endTime, String creator, String invitieesString, String frequency) {
-
+        this.id = id;
         this.name = name;
         this.description = description;
         
@@ -58,6 +59,10 @@ public class Event {
             this.invitiees.add(invites[i]);
         }
 
+    }
+    
+    public int getID() {
+        return id;
     }
     
     public String getName() {
