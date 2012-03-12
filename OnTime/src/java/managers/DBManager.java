@@ -84,7 +84,7 @@ public class DBManager {
         {
             ArrayList<Event> events = new ArrayList<Event>();
             
-            String sqlQuery = "SELECT * FROM events WHERE invitiees LIKE '%" + user + "%';";
+            String sqlQuery = "SELECT * FROM events WHERE invitiees LIKE '%" + user + "%' OR creator='" + user + "' ORDER BY startDateDay,startDateMonth,startDateYear;";
             
 		try {
                         statement = null;
