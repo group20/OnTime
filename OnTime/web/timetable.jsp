@@ -67,16 +67,21 @@ notes: Must create function to highlight the current day (.today)
         <link rel="stylesheet" href="css/style.css?v=1.0">
         <link rel="stylesheet" href="css/style2.css?v=1.0">
         <link rel="stylesheet" href="css/style3.css?v=1.0">
+        <link rel="stylesheet" href="css/addEvStyle.css?v=1.0">
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script type="text/javascript" src="jquery.easing.1.3.js"></script>
         <script type="text/javascript" src="script.js"></script>
         <script language="JavaScript" src="CalendarPopup.js"></script>
         <script language="JavaScript" src="common.js"></script>
         <SCRIPT LANGUAGE="JavaScript">document.write(getCalendarStyles());</SCRIPT>
+        <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="jquery-ui-1.8.custom.min.js"></script>
+        <script type="text/javascript">var count=1;</script>
         <script type="text/javascript">
+            var count = 0;
             function initMenu() {
                 var block = $(".day");
-				
+                
                 $('.open').hide(); 
                 block.click(
                 function() {
@@ -94,7 +99,7 @@ notes: Must create function to highlight the current day (.today)
 					source: function(req, add){
 					
 						//pass request to server
-						$.getJSON("http://cs1.ucc.ie/~jk7/3rd_year_project/names.php?callback=?", req, function(data) {
+						$.getJSON("http://localhost/project/names.php?callback=?", req, function(data) {
 							
 							//create array for response objects
 							var suggestions = [];
@@ -111,17 +116,24 @@ notes: Must create function to highlight the current day (.today)
 					
 					//define select handler
 					select: function(e, ui) {
+                                        
 						
 						//create formatted friend
 						var friend = ui.item.value,
 							span = $("<span>").text(friend),
+                                                        
+                                                        input= $("<input>").attr({type: "hidden", name: "invitees" +count, value: friend}),  
+                                                       
 							a = $("<a>").addClass("remove").attr({
 								href: "javascript:",
+                                                                input: "",
 								title: "Remove " + friend
-							}).text("x").appendTo(span);
+							}).text(" x").appendTo(span);
 						
 						//add friend to friend div
+                                                input.insertBefore("#to");
 						span.insertBefore("#to");
+                                            count++;    
 					},
 					
 					//define select handler
@@ -133,7 +145,7 @@ notes: Must create function to highlight the current day (.today)
 				});
 				
 				//add click handler to friends div
-				$("#friends").click(function(){
+				$("#to").click(function(){
 					
 					//focus 'to' field
 					$("#to").focus();
@@ -157,7 +169,7 @@ notes: Must create function to highlight the current day (.today)
         <![endif]-->
     </head>
     <body>
-        <div id="welcome"
+        <div id="welcome">
              <p>You have successfully logged into Team 20's Timetable System</p>
             <%
                 out.print("UserName : " + session.getAttribute("sessUserName"));
@@ -225,6 +237,11 @@ notes: Must create function to highlight the current day (.today)
                                         <!--<input type="time" name="starttime" tabindex="5" placeholder="Start Time" required />-->
                                         <!--<input type="time" name="endtime" tabindex="6" placeholder="End Time" required />-->
                                         <!--<input type="text" name="invitiees" placeholder="Who's going?" tabindex="7"  />-->
+                                        <label id="toLabel">People to meet:</label>
+					<div id="friends" class="ui-helper-clearfix">
+						
+                                                <input name="invitiees"  id="to" type="text"  />
+					</div>
                                         <select name="frequency" >
                                             <option value="0">One-time event</option>
                                             <option value="1">Daily</option>
