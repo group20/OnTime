@@ -67,16 +67,21 @@ notes: Must create function to highlight the current day (.today)
         <link rel="stylesheet" href="css/style.css?v=1.0">
         <link rel="stylesheet" href="css/style2.css?v=1.0">
         <link rel="stylesheet" href="css/style3.css?v=1.0">
+        <link rel="stylesheet" href="css/addEvStyle.css?v=1.0">
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script type="text/javascript" src="jquery.easing.1.3.js"></script>
         <script type="text/javascript" src="script.js"></script>
         <script language="JavaScript" src="CalendarPopup.js"></script>
         <script language="JavaScript" src="common.js"></script>
         <SCRIPT LANGUAGE="JavaScript">document.write(getCalendarStyles());</SCRIPT>
+        <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="jquery-ui-1.8.custom.min.js"></script>
+        <script type="text/javascript">var count=1;</script>
         <script type="text/javascript">
+            var count = 0;
             function initMenu() {
                 var block = $(".day");
-				
+                
                 $('.open').hide(); 
                 block.click(
                 function() {
@@ -84,13 +89,87 @@ notes: Must create function to highlight the current day (.today)
                 }
             );}
             $(document).ready(function() {initMenu();});
+            
+            			$(function(){
+				
+				//attach autocomplete
+				$("#to").autocomplete({
+					
+					//define callback to format results
+					source: function(req, add){
+					
+						//pass request to server
+						$.getJSON("http://localhost/project/names.php?callback=?", req, function(data) {
+							
+							//create array for response objects
+							var suggestions = [];
+							
+							//process response
+							$.each(data, function(i, val){								
+								suggestions.push(val.name);
+							});
+							
+							//pass array to callback
+							add(suggestions);
+						});
+					},
+					
+					//define select handler
+					select: function(e, ui) {
+                                        
+						
+						//create formatted friend
+						var friend = ui.item.value,
+							span = $("<span>").text(friend),
+                                                        
+                                                        input= $("<input>").attr({type: "hidden", name: "invitees" +count, value: friend}),  
+                                                       
+							a = $("<a>").addClass("remove").attr({
+								href: "javascript:",
+                                                                input: "",
+								title: "Remove " + friend
+							}).text(" x").appendTo(span);
+						
+						//add friend to friend div
+                                                input.insertBefore("#to");
+						span.insertBefore("#to");
+                                            count++;    
+					},
+					
+					//define select handler
+					change: function() {
+						
+						//prevent 'to' field being updated and correct position
+						$("#to").val("").css("top", 2);
+					}
+				});
+				
+				//add click handler to friends div
+				$("#to").click(function(){
+					
+					//focus 'to' field
+					$("#to").focus();
+				});
+				
+				//add live handler for clicks on remove links
+				$(".remove", document.getElementById("friends")).live("click", function(){
+				
+					//remove current friend
+					$(this).parent().remove();
+					
+					//correct 'to' field position
+					if($("#friends span").length === 0) {
+						$("#to").css("top", 0);
+					}				
+				});				
+			});
         </script>
         <!--[if lt IE 9]>
         <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
     <body>
-        <div id="welcome"
+        <div id="welcome">
              <p>You have successfully logged into Team 20's Timetable System</p>
             <%
                 out.print("UserName : " + session.getAttribute("sessUserName"));
@@ -122,10 +201,47 @@ notes: Must create function to highlight the current day (.today)
                                         <a href="#" onClick="cal1x.select(document.forms['addevent'].enddate,'anchor2x','dd/MM/yyyy');return false;" 
                                            title="cal2x.select(document.forms['addevent'].enddate,'anchor2x','dd/MM/yyyy'); return false;" NAME="anchor2x" ID="anchor2x"><input type="text" name="enddate" tabindex="4" placeholder="End Date" required ></a>
 
-
-                                        <input type="time" name="starttime" tabindex="5" placeholder="Start Time" required />
-                                        <input type="time" name="endtime" tabindex="6" placeholder="End Time" required />
-                                        <input type="text" name="invitiees" placeholder="Who's going?" tabindex="7"  />
+                                        <h2>Start time</h2>   
+                                        <select type="time" name="starttime">
+                                        <option value="8">08:00</option>
+                                        <option value="9">09:00</option>
+                                        <option value="10">10:00</option>
+                                        <option value="11">11:00</option>
+                                        <option value="12">12:00</option>
+                                        <option value="13">13:00</option>
+                                        <option value="14">14:00</option>
+                                        <option value="15">15:00</option>
+                                        <option value="16">16:00</option>
+                                        <option value="17">17:00</option>
+                                        <option value="18">18:00</option>
+                                        <option value="19">19:00</option>
+                                        <option value="20">20:00</option>
+                                        </select>
+                                         <br/>
+                                         <h2>End time</h2>   
+                                        <select type="time" name="endtime">
+                                        <option value="8">08:00</option>
+                                        <option value="9">09:00</option>
+                                        <option value="10">10:00</option>
+                                        <option value="11">11:00</option>
+                                        <option value="12">12:00</option>
+                                        <option value="13">13:00</option>
+                                        <option value="14">14:00</option>
+                                        <option value="15">15:00</option>
+                                        <option value="16">16:00</option>
+                                        <option value="17">17:00</option>
+                                        <option value="18">18:00</option>
+                                        <option value="19">19:00</option>
+                                        <option value="20">20:00</option>
+                                        </select>
+                                        <!--<input type="time" name="starttime" tabindex="5" placeholder="Start Time" required />-->
+                                        <!--<input type="time" name="endtime" tabindex="6" placeholder="End Time" required />-->
+                                        <!--<input type="text" name="invitiees" placeholder="Who's going?" tabindex="7"  />-->
+                                        <label id="toLabel">People to meet:</label>
+					<div id="friends" class="ui-helper-clearfix">
+						
+                                                <input name="invitiees"  id="to" type="text"  />
+					</div>
                                         <select name="frequency" >
                                             <option value="0">One-time event</option>
                                             <option value="1">Daily</option>
