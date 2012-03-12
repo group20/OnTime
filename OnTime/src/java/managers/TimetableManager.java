@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import javafiles.Event;
 
 public class TimetableManager {
@@ -19,11 +21,8 @@ public class TimetableManager {
      * @throws FileNotFoundException
      * @throws IOException 
      */
-    public String outputTimetable(String user, Calendar cal) throws FileNotFoundException, IOException
+    public String outputTimetable(Calendar cal, ArrayList<Event> events) throws FileNotFoundException, IOException
     {
-
-        DBManager db = new DBManager();
-        ArrayList<Event> events = db.getEventsForUser(user);
         String output = "";
         
         Calendar cal2 = cal;
@@ -39,7 +38,7 @@ public class TimetableManager {
             ArrayList<Event> todaysEvents = new ArrayList<Event>();
                 for(Event e : events)
                 {
-                    if(e.getStartDateDay() == cal2.get(Calendar.DAY_OF_MONTH) && e.getStartDateMonth() == cal2.get(Calendar.MONTH)+1 && e.getStartDateYear() ==  cal2.get(Calendar.YEAR))
+                    if(e.getStartDateDay() == cal2.get(cal2.DAY_OF_MONTH) && e.getStartDateMonth() == cal2.get(cal2.MONTH)+1 && e.getStartDateYear() ==  cal2.get(cal2.YEAR))
                     {
                         todaysEvents.add(e);
                     }
@@ -76,7 +75,7 @@ public class TimetableManager {
                             output += ("            <li class=\"red\"></li>");            //TODO: need to add entry to 
                         //output += ("            <li class=\"green\"></li>");        db for types of events
                         }
-                        //***************************************************************88
+                        //***************************************************************
                         output += ("        </ul>");
                         output += ("    </div>	");
                         output += ("    <!-- slide open -->");
@@ -87,8 +86,9 @@ public class TimetableManager {
                         for(Event e: eventsForToday) {
                             int duration = e.getEndTime() - e.getStartTime();
                             int startTime = e.getStartTime() - currEventStart - duration;
-                            output += ("            <li class=\"yellow l" + duration + " a" + startTime + " \"><p>" 
-                                                                + e.getStartTime() + ":00 " + e.getDescription() + "</p></li>");
+
+                            output += ("            <li class=\"yellow l" + duration + " a" + startTime + " \"><a href=\"#\" class=\"orange\"><p>" 
+                                                                + e.getStartTime() + ":00 " + e.getDescription() + "</p></a></li>");
                             currEventStart = e.getStartTime();
                             
                         }				
@@ -107,11 +107,11 @@ public class TimetableManager {
                         output += ("    <div class=\"dots\">");
                         output += ("        <ul>");
                         //******************************************************************
-                        
-                        //output += ("            <li class=\"yellow\"></li>"); TODO: need to add entry to 
+                        for(Event e: eventsForToday) {
+                            output += ("            <li class=\"red\"></li>");            //TODO: need to add entry to 
                         //output += ("            <li class=\"green\"></li>");        db for types of events
-                        
-                        //***************************************************************88
+                        }
+                        //***************************************************************
                         output += ("        </ul>");
                         output += ("    </div>	");
                         output += ("    <!-- slide open -->");
@@ -132,5 +132,57 @@ public class TimetableManager {
                         output += ("    <!-- slide closed -->");
                         output += ("</div>");
                         return output;
+    }
+    
+    
+    public String outputFreeSlots(String[] users, Calendar cal) throws FileNotFoundException, IOException{
+       String output = "";
+       DBManager db = new DBManager();
+       
+       cal.set(cal.get(cal.YEAR),cal.get(cal.MONTH),1);
+       cal.setFirstDayOfWeek(Calendar.MONDAY);
+        int lastMonthCount = cal.get(cal.DAY_OF_WEEK) - 2;
+        if(lastMonthCount < 0) lastMonthCount = 6;
+        cal.add(Calendar.DAY_OF_MONTH,-lastMonthCount);
+       ArrayList<Event> resultEvents = new ArrayList<Event>();
+       
+       Map<String,ArrayList<Event>> eventsForUsers = new HashMap<String,ArrayList<Event>>();
+       for(String user: users) {
+           ArrayList<Event> events = db.getEventsForUser(user);
+           if(!eventsForUsers.containsValue(events))
+           {
+                eventsForUsers.put(user, events);
+           }
+       }
+       for(int i = 0; i < 42; i++) {
+           int count = 0;
+           int currYear = cal.get(cal.YEAR);
+           int currMonth = cal.get(cal.MONTH)+1;
+           int currDay = cal.get(cal.DAY_OF_MONTH);
+           String currDate = "" + currDay + "/" + currMonth + "/" + currYear;
+           //for each period between 8am and 8pm
+           for(int j=8; j<20; j++) {
+               for(Map.Entry<String,ArrayList<Event>> entry: eventsForUsers.entrySet())  {
+                   String user = entry.getKey();
+                   ArrayList<Event> events = entry.getValue();
+                   for(Event e : events)
+                   {
+                        if(e.getStartDateDay() == cal.get(Calendar.DAY_OF_MONTH) && e.getStartDateMonth() == cal.get(Calendar.MONTH)+1 && e.getStartDateYear() ==  cal.get(Calendar.YEAR) && e.getStartTime() == j)
+                        {
+                            count++;
+                        }
+                        
+                   }
+               }
+               //now add the results for this period to the list of events
+               resultEvents.add(new Event("", ""+count,
+                                        currDate, currDate, j, j+1, "", "", ""));
+               count = 0;
+           }
+           cal.add(Calendar.DAY_OF_MONTH,1);
+           System.out.println(currDate);
+       }
+       cal.add(Calendar.MONTH,-1);
+       return outputTimetable(cal, resultEvents);
     }
 }

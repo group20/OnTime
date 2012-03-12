@@ -7,6 +7,7 @@ notes: Must create function to highlight the current day (.today)
        Must create function to make the current week bigger (.big) testingg
 --%>
 
+<%@page import="managers.DBManager"%>
 <%@ page contentType="text/html; charset=iso-8859-1" language="java"%>
 <%@page session="true" import="java.util.*" %>
 <jsp:useBean id="tm" scope="page" class="managers.TimetableManager" />
@@ -14,38 +15,32 @@ notes: Must create function to highlight the current day (.today)
 
 <%
     String userName = (String) session.getAttribute("sessUserName");
-//    if (userName == null) {
-//        response.sendRedirect(".");
-    //   }
+    if (userName == null) {
+        response.sendRedirect(".");
+    }
 %>
 
 <%
-    // get the current year/month/day
+    
+    DBManager db = new DBManager();
+    ArrayList<Event> events = db.getEventsForUser(userName);
+ 
     Calendar cal = Calendar.getInstance();
+    int offset = 0;
+    if(request.getParameter("offset") != null) {
+        offset = Integer.parseInt(request.getParameter("offset"));
+    }
+    if(request.getParameter("month") != null && request.getParameter("month").equals("prev")) {
+        offset--;
+        cal.add(Calendar.MONTH,offset);
+    } else if(request.getParameter("month") != null && request.getParameter("month").equals("next")) {
+        offset++;
+        cal.add(Calendar.MONTH,offset);
+    }
    
-    int currentYearInt = cal.get(Calendar.YEAR);
-    int currentMonthInt = cal.get(Calendar.MONTH);
-    int currentDayInt = cal.get(Calendar.DATE);
-    String currentYearString = new Integer(currentYearInt).toString();
-    String currentMonthString = new Integer(currentMonthInt).toString();
-
-    // get parameters the user might have sent by clicking fwd or back
-    String newMonth = request.getParameter("month");
-    String newYear = request.getParameter("year");
-
-    // reset the month and year if necessary
-    if (newMonth != null) {
-        currentMonthString = newMonth;
-    }
-    if (newYear != null) {
-        currentYearString = newYear;
-    }
-
-    // determine the next/previous month and year
-    int intMonth = new Integer(currentMonthString).intValue();
-    int intYear = new Integer(currentYearString).intValue();
-
-    // determine the name of the current intMonth
+    int yearInt = cal.get(Calendar.YEAR);
+    int monthInt = cal.get(Calendar.MONTH);
+    
     String monthNames[] = {"January",
         "February",
         "March",
@@ -59,23 +54,7 @@ notes: Must create function to highlight the current day (.today)
         "November",
         "December"};
 
-    String monthName = monthNames[intMonth];
-
-    // determine the next/previous month and year.
-    int nextYear = intYear;
-    int prevYear = intYear;
-    int prevMonth = intMonth - 1;
-    if (prevMonth == -1) {
-        prevMonth = 11;
-        prevYear--;
-    }
-    int nextMonth = intMonth + 1;
-    if (nextMonth == 12) {
-        nextMonth = 0;
-        nextYear++;
-    }
-    
-    cal.set(currentMonthInt, intMonth);
+    String monthName = monthNames[monthInt];
 %>
 
 <!doctype html>
@@ -146,7 +125,7 @@ notes: Must create function to highlight the current day (.today)
 
                                         <input type="time" name="starttime" tabindex="5" placeholder="Start Time" required />
                                         <input type="time" name="endtime" tabindex="6" placeholder="End Time" required />
-                                        <input type="text" name="invitiees" tabindex="7"  />
+                                        <input type="text" name="invitiees" placeholder="Who's going?" tabindex="7"  />
                                         <select name="frequency" >
                                             <option value="0">One-time event</option>
                                             <option value="1">Daily</option>
@@ -224,22 +203,22 @@ notes: Must create function to highlight the current day (.today)
             <td id="prev_link">
                 <form method="post" id="selecttable">
                     <input id ="navInputLeft" type="submit" name="PREV" value=" << ">
-                    <input type="hidden" name="month" value="<%=prevMonth%>">
-                    <input type="hidden" name="year" value="<%=prevYear%>">
+                    <input type="hidden" name="month" value="prev">
+                    <input type="hidden" name="offset" value="<%=offset%>">
                 </form>
             </td>
             <td id="link_to_month_view">
                 <form method="post" id="selecttable">
                     <input id ="navInputMid"type="submit" value="This Month" class="submit_button">
-                    <input type="hidden" name="month" value="<%=currentMonthInt%>">
-                    <input type="hidden" name="year"  value="<%=currentYearInt%>">
+                    <input type="hidden" name="month" value="current">
+                    <input type="hidden" name="offset"  value="0">
                 </form>
             </td>
             <td id="next_link">
                 <form method="post" id="selecttable">
                     <input id ="navInputRight" type="submit" name="NEXT" value=" >> ">
-                    <input type="hidden" name="month" value="<%=nextMonth%>">
-                    <input type="hidden" name="year" value="<%=nextYear%>">
+                    <input type="hidden" name="month" value="next">
+                    <input type="hidden" name="offset" value="<%=offset%>">
                 </form>
             </td>
         </tr>
@@ -247,7 +226,7 @@ notes: Must create function to highlight the current day (.today)
 <div id="calendar">	
     <div id="calcontainer">
         <div id="calheader">
-            <h2><%=monthName + " " + intYear%></h2>
+            <h2><%=monthName + " " + yearInt%></h2>
         </div>		
         <div id="daysweek">
             <div class="dayweek"><p>Monday</p></div>
@@ -260,7 +239,7 @@ notes: Must create function to highlight the current day (.today)
         </div>
         <div id="daysmonth">
             <div class="week">
-                <%=tm.outputTimetable(userName, cal)%>
+                <%=tm.outputTimetable(cal,events)%>
             </div>				
         </div>					
         <div id="calcat">

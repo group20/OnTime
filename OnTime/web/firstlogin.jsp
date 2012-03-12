@@ -3,7 +3,12 @@
     Created on : 07-Mar-2012, 15:45:07
     Author     : paul
 --%>
-
+<%
+    String userName = (String) session.getAttribute("sessUserName");
+    if (userName == null) {
+        response.sendRedirect(".");
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
