@@ -99,7 +99,7 @@ notes: Must create function to highlight the current day (.today)
                     source: function(req, add){
 
                     //pass request to server
-                    $.getJSON("http://localhost/project/names.php?callback=?", req, function(data) {
+                    $.getJSON("http://localhost/xampp/names.php?callback=?", req, function(data) {
 
                     //create array for response objects
                     var suggestions = [];
@@ -187,19 +187,19 @@ notes: Must create function to highlight the current day (.today)
                                 <li>
                                     <form name="addevent "id="addevent" method="post" action="addNewEvent.jsp">
                                         <h2>New Event</h2>
-                                        <input type="text" name="name" tabindex="1" placeholder="Title" required />
-                                        <input type="text" size="25" name="description" tabindex="2" placeholder="Description" />
+                                        <input id ="inputtest" type="text" name="name" tabindex="1" placeholder="Title" required />
+                                        <input id ="inputtest" type="text" size="25" name="description" tabindex="2" placeholder="Description" />
                                         <script language="JavaScript" id="jscal1x">
                                             var cal1x = new CalendarPopup("testdiv1");
                                         </script>
                                         <a href="#" onClick="cal1x.select(document.forms['addevent'].startdate,'anchor1x','dd/MM/yyyy');return false;"
-                                           TITLE="cal1x.select(document.forms['addevent'].startdate,'anchor1x','dd/MM/yyyy'); return false;" NAME="anchor1x" ID="anchor1x"><input type="text" name="startdate" tabindex="3" placeholder="Start Date" required ></a>
+                                           TITLE="cal1x.select(document.forms['addevent'].startdate,'anchor1x','dd/MM/yyyy'); return false;" NAME="anchor1x" ID="anchor1x"><input id ="inputtest" type="text" name="startdate" tabindex="3" placeholder="Start Date" required ></a>
 
                                         <script language="JavaScript" id="jscal2x">
                                             var cal2x = new CalendarPopup("testdiv1");
                                         </script>
                                         <a href="#" onClick="cal1x.select(document.forms['addevent'].enddate,'anchor2x','dd/MM/yyyy');return false;"
-                                           title="cal2x.select(document.forms['addevent'].enddate,'anchor2x','dd/MM/yyyy'); return false;" NAME="anchor2x" ID="anchor2x"><input type="text" name="enddate" tabindex="4" placeholder="End Date" required ></a>
+                                           title="cal2x.select(document.forms['addevent'].enddate,'anchor2x','dd/MM/yyyy'); return false;" NAME="anchor2x" ID="anchor2x"><input id ="inputtest" type="text" name="enddate" tabindex="4" placeholder="End Date" required ></a>
 
                                         <h2>Start time</h2>
                                         <select type="time" name="starttime">
@@ -240,7 +240,7 @@ notes: Must create function to highlight the current day (.today)
                                         
                                           <div id="friends" class="ui-helper-clearfix">
                                               <label id="toLabel">People to meet:</label>
-                                                <input name="invitiees" id="to" type="text" />
+                                                <input id ="inputtest" name="invitiees" id="to" type="text" />
                                             </div>
                                         <select name="frequency" >
                                             <option value="0">One-time event</option>
@@ -321,7 +321,8 @@ layer-background-color:white;">
 
 </ul>
 </div>
- <table id="calendar_nav_table">
+<div id="calendar">
+                     <table>
         <tr>
             <td id="prev_link">
                 <form method="post" id="selecttable">
@@ -346,7 +347,6 @@ layer-background-color:white;">
             </td>
         </tr>
     </table>
-<div id="calendar">
     <div id="calcontainer">
         <div id="calheader">
             <h2><%=monthName + " " + yearInt%></h2>

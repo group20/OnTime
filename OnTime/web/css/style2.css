@@ -18,10 +18,25 @@ table{border-collapse:collapse;border-spacing:0;}
     position: relative;
 }
 
-#calendar_nav_table{
-    top:0px;
-    width:460px;
-    position:absolute;
+#navInputMid{
+    width:100%;
+    align:center;
+}
+#navInputLeft{
+    background:url(../images/whiteleft.png) no-repeat;
+    width:30px;
+    height:30px;
+    text-indent:-9999px;
+    border:0;
+    float:left;
+}
+#navInputRight{
+    background:url(../images/whiteright.png) no-repeat;
+    width:30px;
+    height:30px;
+    text-indent:-9999px;
+    border:0;
+    float:right;
 }
 
 #calheader{
@@ -178,31 +193,3 @@ table{border-collapse:collapse;border-spacing:0;}
 #calcat{float:right;margin-bottom:20px;margin-right:5px;}
 #calcat p{margin-top:4px;float:left; color:white;}
 .caldot{float:left;width:12px;height:12px;border-radius:20px;margin-left:10px;margin-top:4px;margin-right:8px;}
-#calendar_nav_table{
-    left:40px;
-    top:25px;
-}
-#navInputMid{
-    width:100px;
-    position:absolute;
-}
-#navInputLeft{
-    background:url(../images/arrowleft.png) no-repeat;
-    display:block;
-    width:24px;
-    height:42px;
-    text-indent:-9999px;
-    border:0;
-    left:120px;
-    position:absolute;
-}
-#navInputRight{
-    background:url(../images/arrowright.png) no-repeat;
-    display:block;
-    width:24px;
-    height:42px;
-    text-indent:-9999px;
-    border:0;
-    left:265px;
-    position:absolute;
-}
