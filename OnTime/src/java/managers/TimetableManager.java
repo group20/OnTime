@@ -45,7 +45,7 @@ public class TimetableManager {
                 }
                 if(dayCount == 7)
                 {
-                    output += outputDayBrn(cal2.get(Calendar.DAY_OF_MONTH), todaysEvents);
+                    output += outputDayBrn(cal2.get(Calendar.DAY_OF_MONTH), todaysEvents, cal2);
                     dayCount = 0;
                     output += "</div>";
                     if(i != 41)
@@ -56,7 +56,7 @@ public class TimetableManager {
                 }
                 else
                 {
-                    output += outputDay(cal2.get(Calendar.DAY_OF_MONTH), todaysEvents);
+                    output += outputDay(cal2.get(Calendar.DAY_OF_MONTH), todaysEvents, cal2);
                 }
                 cal2.add(Calendar.DAY_OF_MONTH,1);
                 dayCount++;
@@ -64,9 +64,21 @@ public class TimetableManager {
         return output;
     }
     
-    private String outputDay(int dayNumber, ArrayList<Event> eventsForToday ) {
+    private String outputDay(int dayNumber, ArrayList<Event> eventsForToday, Calendar cal ) {
                         String output = "";
-                        output += ("<div class=\"day\">");
+                        Calendar currCal = Calendar.getInstance();
+                        currCal.setFirstDayOfWeek(Calendar.MONDAY);
+                        String dayClass = "day";
+                        if(currCal.get(currCal.DAY_OF_MONTH) == cal.get(cal.DAY_OF_MONTH)
+                                        && currCal.get(currCal.MONTH) == cal.get(cal.MONTH) 
+                                        && currCal.get(currCal.MONTH) == cal.get(cal.MONTH)) {
+                            dayClass += " today big";
+                        } else if(currCal.get(currCal.WEEK_OF_YEAR) == cal.get(cal.WEEK_OF_YEAR))
+                        {
+                            dayClass += " big";
+                        }
+                        
+                        output += ("<div class=\"" + dayClass + "\">");
                         output += ("    <div class=\"daybar\"><p>" + dayNumber + "</p></div>");
                         output += ("    <div class=\"dots\">");
                         output += ("        <ul>");
@@ -124,9 +136,21 @@ public class TimetableManager {
                  return output;
     }
     
-    private String outputDayBrn(int dayNumber, ArrayList<Event> eventsForToday) {
+    private String outputDayBrn(int dayNumber, ArrayList<Event> eventsForToday, Calendar cal) {
                         String output = "";
-                        output += ("<div class=\"day brn\">");
+                        Calendar currCal = Calendar.getInstance();
+                        currCal.setFirstDayOfWeek(Calendar.MONDAY);
+                        String dayClass = "day brn";
+                        if(currCal.get(currCal.DAY_OF_MONTH) == cal.get(cal.DAY_OF_MONTH)
+                                        && currCal.get(currCal.MONTH) == cal.get(cal.MONTH) 
+                                        && currCal.get(currCal.MONTH) == cal.get(cal.MONTH)) {
+                            dayClass += " today big";
+                        } else if(currCal.get(currCal.WEEK_OF_YEAR) == cal.get(cal.WEEK_OF_YEAR))
+                        {
+                            dayClass += " big";
+                        }
+                        
+                        output += ("<div class=\"" + dayClass + "\">");
                         output += ("    <div class=\"daybar\"><p>" + dayNumber + "</p></div>");
                         output += ("    <div class=\"dots\">");
                         output += ("        <ul>");
