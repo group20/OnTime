@@ -169,13 +169,14 @@ notes: Must create function to highlight the current day (.today)
 <![endif]-->
     </head>
     <body>
+        <div id="wrapper">
         <div id="welcome">
              <p>You have successfully logged into Team 20's Timetable System</p>
             <%
                 out.print("UserName : " + session.getAttribute("sessUserName"));
             %>
             <p><a href="logout.jsp">Logout</a></p>
-            <ul class="container">
+                       <ul class="container">
                 <li class="menu">
 
                     <ul>
@@ -257,7 +258,7 @@ notes: Must create function to highlight the current day (.today)
                                         <input type="submit" value="Create" name="submit" class="submit" />
                                         
                                     </form>
-                                    <div id="testdiv1" style="position:absolute;
+                                    <div id="testdiv1" style="
 visibility:hidden;
 background-color:white;
 layer-background-color:white;">
@@ -271,56 +272,12 @@ layer-background-color:white;">
 
         </li>
 
-        <li class="menu">
 
-            <ul>
-                <li class="button"><a href="#" class="orange">Edit Event <span></span></a></li>
-
-                <li class="dropdown">
-                    <ul>
-                        <li>
-                        <li>
-                            <form id="firsttime3" method="post">
-                                <h2>Edit Event</h2>
-                                <input type="text" name="firstname" tabindex="1" placeholder="First name" required>
-                                <input type="text" name="surname" tabindex="2" placeholder="Surname" required>
-                                <input type="text" name="email" tabindex="3" placeholder="Email" required>
-                                <input type="submit" value="Create Account" name="submit" class="submit" />
-                            </form></li>
-                </li>
-            </ul>
-        </li>
-
-    </ul>
-
-</li>
-
-<li class="menu">
-
-    <ul>
-        <li class="button"><a href="#" class="blue">Remove Event <span></span></a></li>
-
-        <li class="dropdown">
-            <ul>
-                <li>
-                <li>
-                    <form id="firsttime3" method="post">
-                        <h2>Remove Event</h2>
-                        <input type="text" name="firstname" tabindex="1" placeholder="First name" required>
-                        <input type="text" name="surname" tabindex="2" placeholder="Surname" required>
-                        <input type="text" name="email" tabindex="3" placeholder="Email" required>
-                        <input type="submit" value="Create Account" name="submit" class="submit" />
-                    </form></li>
-        </li>
-    </ul>
-</li>
-
-</ul>
-
-</li>
 
 </ul>
 </div>
+            
+             
 <div id="calendar">
                      <table>
         <tr>
@@ -348,6 +305,7 @@ layer-background-color:white;">
         </tr>
     </table>
     <div id="calcontainer">
+        
         <div id="calheader">
             <h2><%=monthName + " " + yearInt%></h2>
         </div>
@@ -380,6 +338,6 @@ layer-background-color:white;">
     </div>
 </div>
 </body>
-
+</div>
 <footer>A Team 20 Project.</footer>
 </html>
