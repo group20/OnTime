@@ -15,7 +15,8 @@ table{border-collapse:collapse;border-spacing:0;}
     padding-top: 25px;
     width: 760px;
     text-align: center;
-    position: relative;
+    position: absolute;
+    left:30%;
 }
 
 #navInputMid{
