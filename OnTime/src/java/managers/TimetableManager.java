@@ -71,9 +71,9 @@ public class TimetableManager {
                         String dayClass = "day";
                         if(currCal.get(currCal.DAY_OF_MONTH) == cal.get(cal.DAY_OF_MONTH)
                                         && currCal.get(currCal.MONTH) == cal.get(cal.MONTH) 
-                                        && currCal.get(currCal.MONTH) == cal.get(cal.MONTH)) {
+                                        && currCal.get(currCal.YEAR) == cal.get(cal.YEAR)) {
                             dayClass += " today big";
-                        } else if(currCal.get(currCal.WEEK_OF_YEAR) == cal.get(cal.WEEK_OF_YEAR))
+                        } else if(currCal.get(currCal.WEEK_OF_YEAR) == cal.get(cal.WEEK_OF_YEAR) && currCal.get(currCal.YEAR) == cal.get(cal.YEAR))
                         {
                             dayClass += " big";
                         }
@@ -143,9 +143,9 @@ public class TimetableManager {
                         String dayClass = "day brn";
                         if(currCal.get(currCal.DAY_OF_MONTH) == cal.get(cal.DAY_OF_MONTH)
                                         && currCal.get(currCal.MONTH) == cal.get(cal.MONTH) 
-                                        && currCal.get(currCal.MONTH) == cal.get(cal.MONTH)) {
+                                        && currCal.get(currCal.YEAR) == cal.get(cal.YEAR)) {
                             dayClass += " today big";
-                        } else if(currCal.get(currCal.WEEK_OF_YEAR) == cal.get(cal.WEEK_OF_YEAR))
+                        } else if(currCal.get(currCal.WEEK_OF_YEAR) == cal.get(cal.WEEK_OF_YEAR) && currCal.get(currCal.YEAR) == cal.get(cal.YEAR))
                         {
                             dayClass += " big";
                         }
