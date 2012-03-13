@@ -31,7 +31,7 @@ public class DBManager {
 			String db_password) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/group20", "root", "password");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/group20", "root", "");
 
 			System.out.println("connected");
 			return conn;

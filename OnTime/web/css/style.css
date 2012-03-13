@@ -101,10 +101,6 @@ input {
     /*** Transition Selectors - What properties to animate and how long ***/
     -webkit-transition-property: -webkit-box-shadow, background;
     -webkit-transition-duration: 0.25s;
-
-    /*** Adding a small shadow ***/
-    -moz-box-shadow: 0px 0px 2px #FFF;
-    -webkit-box-shadow: 0px 0px 2px #FFF;
 }
 
 input::-webkit-input-placeholder {
