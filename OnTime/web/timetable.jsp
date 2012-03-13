@@ -1,7 +1,7 @@
-<%-- 
-    Document   : success
+<%--
+    Document : success
     Created on : Feb 17, 2012, 8:15:06 PM
-    Author     : Donnchadh
+    Author : Donnchadh
 
 notes: Must create function to highlight the current day (.today)
        Must create function to make the current week bigger (.big) testingg
@@ -82,91 +82,91 @@ notes: Must create function to highlight the current day (.today)
             function initMenu() {
                 var block = $(".day");
                 
-                $('.open').hide(); 
+                $('.open').hide();
                 block.click(
                 function() {
-                    $(this).parents('div:eq(0)').find('.open').slideToggle('fast');	
+                    $(this).parents('div:eq(0)').find('.open').slideToggle('fast');
                 }
             );}
             $(document).ready(function() {initMenu();});
             
-            			$(function(){
-				
-				//attach autocomplete
-				$("#to").autocomplete({
-					
-					//define callback to format results
-					source: function(req, add){
-					
-						//pass request to server
-						$.getJSON("http://localhost/project/names.php?callback=?", req, function(data) {
-							
-							//create array for response objects
-							var suggestions = [];
-							
-							//process response
-							$.each(data, function(i, val){								
-								suggestions.push(val.name);
-							});
-							
-							//pass array to callback
-							add(suggestions);
-						});
-					},
-					
-					//define select handler
-					select: function(e, ui) {
-                                        
-						
-						//create formatted friend
-						var friend = ui.item.value,
-							span = $("<span>").text(friend),
-                                                        
-                                                        input= $("<input>").attr({type: "hidden", name: "invitees" +count, value: friend}),  
-                                                       
-							a = $("<a>").addClass("remove").attr({
-								href: "javascript:",
-                                                                input: "",
-								title: "Remove " + friend
-							}).text(" x").appendTo(span);
-						
-						//add friend to friend div
-                                                input.insertBefore("#to");
-						span.insertBefore("#to");
-                                            count++;    
-					},
-					
-					//define select handler
-					change: function() {
-						
-						//prevent 'to' field being updated and correct position
-						$("#to").val("").css("top", 2);
-					}
-				});
-				
-				//add click handler to friends div
-				$("#to").click(function(){
-					
-					//focus 'to' field
-					$("#to").focus();
-				});
-				
-				//add live handler for clicks on remove links
-				$(".remove", document.getElementById("friends")).live("click", function(){
-				
-					//remove current friend
-					$(this).parent().remove();
-					
-					//correct 'to' field position
-					if($("#friends span").length === 0) {
-						$("#to").css("top", 0);
-					}				
-				});				
-			});
+             $(function(){
+
+                    //attach autocomplete
+                    $("#to").autocomplete({
+
+                    //define callback to format results
+                    source: function(req, add){
+
+                    //pass request to server
+                    $.getJSON("http://localhost/project/names.php?callback=?", req, function(data) {
+
+                    //create array for response objects
+                    var suggestions = [];
+
+                    //process response
+                    $.each(data, function(i, val){
+                    suggestions.push(val.name);
+                    });
+
+                    //pass array to callback
+                    add(suggestions);
+                    });
+                    },
+
+                    //define select handler
+                    select: function(e, ui) {
+
+
+                    //create formatted friend
+                    var friend = ui.item.value,
+                    span = $("<span>").text(friend),
+
+                    input= $("<input>").attr({type: "hidden", name: "invitees" +count, value: friend}),
+
+                    a = $("<a>").addClass("remove").attr({
+                    href: "javascript:",
+                                                                                    input: "",
+                    title: "Remove " + friend
+                    }).text(" x").appendTo(span);
+
+                    //add friend to friend div
+                                                                    input.insertBefore("#to");
+                    span.insertBefore("#to");
+                                                                count++;
+                    },
+
+                    //define select handler
+                    change: function() {
+
+                    //prevent 'to' field being updated and correct position
+                    $("#to").val("").css("top", 2);
+                    }
+                    });
+
+                    //add click handler to friends div
+                    $("#to").click(function(){
+
+                    //focus 'to' field
+                    $("#to").focus();
+                    });
+
+                    //add live handler for clicks on remove links
+                    $(".remove", document.getElementById("friends")).live("click", function(){
+
+                    //remove current friend
+                    $(this).parent().remove();
+
+                    //correct 'to' field position
+                    if($("#friends span").length === 0) {
+                    $("#to").css("top", 0);
+                    }
+                    });
+                    });
         </script>
         <!--[if lt IE 9]>
-        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
     </head>
     <body>
         <div id="welcome">
@@ -192,16 +192,16 @@ notes: Must create function to highlight the current day (.today)
                                         <script language="JavaScript" id="jscal1x">
                                             var cal1x = new CalendarPopup("testdiv1");
                                         </script>
-                                        <a href="#" onClick="cal1x.select(document.forms['addevent'].startdate,'anchor1x','dd/MM/yyyy');return false;" 
+                                        <a href="#" onClick="cal1x.select(document.forms['addevent'].startdate,'anchor1x','dd/MM/yyyy');return false;"
                                            TITLE="cal1x.select(document.forms['addevent'].startdate,'anchor1x','dd/MM/yyyy'); return false;" NAME="anchor1x" ID="anchor1x"><input type="text" name="startdate" tabindex="3" placeholder="Start Date" required ></a>
 
                                         <script language="JavaScript" id="jscal2x">
                                             var cal2x = new CalendarPopup("testdiv1");
                                         </script>
-                                        <a href="#" onClick="cal1x.select(document.forms['addevent'].enddate,'anchor2x','dd/MM/yyyy');return false;" 
+                                        <a href="#" onClick="cal1x.select(document.forms['addevent'].enddate,'anchor2x','dd/MM/yyyy');return false;"
                                            title="cal2x.select(document.forms['addevent'].enddate,'anchor2x','dd/MM/yyyy'); return false;" NAME="anchor2x" ID="anchor2x"><input type="text" name="enddate" tabindex="4" placeholder="End Date" required ></a>
 
-                                        <h2>Start time</h2>   
+                                        <h2>Start time</h2>
                                         <select type="time" name="starttime">
                                         <option value="8">08:00</option>
                                         <option value="9">09:00</option>
@@ -218,7 +218,7 @@ notes: Must create function to highlight the current day (.today)
                                         <option value="20">20:00</option>
                                         </select>
                                          <br/>
-                                         <h2>End time</h2>   
+                                         <h2>End time</h2>
                                         <select type="time" name="endtime">
                                         <option value="8">08:00</option>
                                         <option value="9">09:00</option>
@@ -236,24 +236,31 @@ notes: Must create function to highlight the current day (.today)
                                         </select>
                                         <!--<input type="time" name="starttime" tabindex="5" placeholder="Start Time" required />-->
                                         <!--<input type="time" name="endtime" tabindex="6" placeholder="End Time" required />-->
-                                        <!--<input type="text" name="invitiees" placeholder="Who's going?" tabindex="7"  />-->
-                                        <label id="toLabel">People to meet:</label>
-					<div id="friends" class="ui-helper-clearfix">
-						
-                                                <input name="invitiees"  id="to" type="text"  />
-					</div>
+                                        <!--<input type="text" name="invitiees" placeholder="Who's going?" tabindex="7" />-->
+                                        
+                                          <div id="friends" class="ui-helper-clearfix">
+                                              <label id="toLabel">People to meet:</label>
+                                                <input name="invitiees" id="to" type="text" />
+                                            </div>
                                         <select name="frequency" >
                                             <option value="0">One-time event</option>
                                             <option value="1">Daily</option>
                                             <option value="2">Weekly</option>
                                             <option value="3">Monthly</option>
                                         </select>
+                                        <div id="radio">
+                                        <input type="radio" name="type" value="0" />Lecture 
+                                        <input type="radio" name="type" value="1" />Tutorial 
+                                        <input type="radio" name="type" value="2" />Student Meeting 
+                                        <input type="radio" name="type" value="3" />Lecturer Meeting 
+                                        </div>
                                         <input type="submit" value="Create" name="submit" class="submit" />
+                                        
                                     </form>
                                     <div id="testdiv1" style="position:absolute;
-                                         visibility:hidden;
-                                         background-color:white;
-                                         layer-background-color:white;">
+visibility:hidden;
+background-color:white;
+layer-background-color:white;">
                                     </div>
                                 </li>
                         </li>
@@ -267,7 +274,7 @@ notes: Must create function to highlight the current day (.today)
         <li class="menu">
 
             <ul>
-                <li class="button"><a href="#" class="orange">Edit Event <span></span></a></li>          	
+                <li class="button"><a href="#" class="orange">Edit Event <span></span></a></li>
 
                 <li class="dropdown">
                     <ul>
@@ -291,7 +298,7 @@ notes: Must create function to highlight the current day (.today)
 <li class="menu">
 
     <ul>
-        <li class="button"><a href="#" class="blue">Remove Event <span></span></a></li>         	
+        <li class="button"><a href="#" class="blue">Remove Event <span></span></a></li>
 
         <li class="dropdown">
             <ul>
@@ -327,7 +334,7 @@ notes: Must create function to highlight the current day (.today)
                 <form method="post" id="selecttable">
                     <input id ="navInputMid"type="submit" value="This Month" class="submit_button">
                     <input type="hidden" name="month" value="current">
-                    <input type="hidden" name="offset"  value="0">
+                    <input type="hidden" name="offset" value="0">
                 </form>
             </td>
             <td id="next_link">
@@ -339,11 +346,11 @@ notes: Must create function to highlight the current day (.today)
             </td>
         </tr>
     </table>
-<div id="calendar">	
+<div id="calendar">
     <div id="calcontainer">
         <div id="calheader">
             <h2><%=monthName + " " + yearInt%></h2>
-        </div>		
+        </div>
         <div id="daysweek">
             <div class="dayweek"><p>Monday</p></div>
             <div class="dayweek"><p>Tuesday</p></div>
@@ -355,21 +362,17 @@ notes: Must create function to highlight the current day (.today)
         </div>
         <div id="daysmonth">
             <div class="week">
-                <%String[] users = new String[2];
-                    users[0]="pmg3";
-                    users[1]="ctml1";%>
-                <%=tm.outputFreeSlots(users,cal)%>
-                <%//=tm.outputTimetable(cal, events)%>
-            </div>				
-        </div>					
+                <%=tm.outputTimetable(cal,events)%>
+            </div>
+        </div>
         <div id="calcat">
             <div class="caldot blue"></div><p>Lecture</p>
             <div class="caldot yellow"></div><p>Tutorial</p>
             <div class="caldot green"></div><p>Student Meeting</p>
             <div class="caldot red"></div><p>Lecturer Meeting</p>
-        </div>				
-    </div>	
-</div>   
+        </div>
+    </div>
+</div>
 </body>
 
 <footer>A Team 20 Project.</footer>
