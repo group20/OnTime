@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `group20` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `group20`;
--- MySQL dump 10.13  Distrib 5.1.58, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.1.61, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: group20
 -- ------------------------------------------------------
--- Server version	5.1.58-1ubuntu1
+-- Server version	5.1.61-0ubuntu0.11.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,6 +57,7 @@ DROP TABLE IF EXISTS `events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `events` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text,
   `description` text,
   `startDateDay` int(11) DEFAULT NULL,
@@ -69,8 +70,10 @@ CREATE TABLE `events` (
   `endtime` int(11) NOT NULL,
   `creator` varchar(45) NOT NULL COMMENT 'True if this user is the creator of the event',
   `frequency` varchar(45) DEFAULT NULL,
-  `invitiees` text
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `invitiees` text,
+  `type` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -82,4 +85,4 @@ CREATE TABLE `events` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-03-07 19:21:36
+-- Dump completed on 2012-03-13 20:36:33
