@@ -29,10 +29,11 @@ public class Event {
     private String creator;
     private ArrayList<String> invitiees;
     private String frequency;
+    private int type;
 
     
     public Event(int id, String name, String description, String startDate, String endDate, int startTime, 
-                        int endTime, String creator, String invitieesString, String frequency) {
+                        int endTime, String creator, String invitieesString, String frequency, int type) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -58,6 +59,37 @@ public class Event {
         {
             this.invitiees.add(invites[i]);
         }
+        this.type = type;
+
+    }
+    
+        public Event(String name, String description, String startDate, String endDate, int startTime, 
+                        int endTime, String creator, String invitieesString, String frequency, int type) {
+        this.name = name;
+        this.description = description;
+        
+        String[] startDates = startDate.split("/");
+        this.startDateDay = Integer.parseInt(startDates[0]);
+        this.startDateMonth = Integer.parseInt(startDates[1]);
+        this.startDateYear = Integer.parseInt(startDates[2]);
+        
+        String[] endDates = endDate.split("/");
+        this.endDateDay = Integer.parseInt(endDates[0]);
+        this.endDateMonth = Integer.parseInt(endDates[1]);
+        this.endDateYear = Integer.parseInt(endDates[2]);
+        
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.creator = creator;
+        this.frequency = frequency;
+        
+        this.invitiees = new ArrayList<String>();
+        String[] invites = invitieesString.split(",");
+        for(int i=0;i<invites.length;i++)
+        {
+            this.invitiees.add(invites[i]);
+        }
+        this.type = type;
 
     }
     
@@ -125,5 +157,9 @@ public class Event {
         }
         output = output.substring(0, (output.length()-2) );
         return output;
+    }
+    
+    public int getType() {
+        return type;
     }
 }

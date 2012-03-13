@@ -16,7 +16,8 @@
                                Integer.parseInt(request.getParameter("endtime")), 
                                session.getAttribute("sessUserName").toString(), 
                                request.getParameter("invitiees"), 
-                               request.getParameter("frequency"));
+                               request.getParameter("frequency"),
+                               Integer.parseInt(request.getParameter("type")));
     DBManager db = new DBManager();
     db.addEvent(newEvent);
     response.sendRedirect("timetable.jsp");

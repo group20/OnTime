@@ -102,7 +102,8 @@ public class DBManager {
                                                 rs.getInt("endTime"),
                                                 rs.getString("creator"),
                                                 rs.getString("invitiees"),
-                                                rs.getString("frequency")));
+                                                rs.getString("frequency"),
+                                                rs.getInt("type")));
                         }
                         
 		} catch (SQLException e) {
@@ -141,7 +142,8 @@ public class DBManager {
                                                 rs.getInt("endTime"),
                                                 rs.getString("creator"),
                                                 rs.getString("invitiees"),
-                                                rs.getString("frequency")));
+                                                rs.getString("frequency"),
+                                                rs.getInt("type")));
                         }
                         
 		} catch (SQLException e) {
@@ -157,7 +159,7 @@ public class DBManager {
                     + "(`id`,`name`,`description`,"
                     + "`startDateDay`,`startDateMonth`,`startDateYear`,"
                     + "`endDateDay`,`endDateMonth`,`endDateYear`,"
-                    + "`starttime`,`endtime`,`creator`,`frequency`,`invitiees`)"
+                    + "`starttime`,`endtime`,`creator`,`frequency`,`invitiees`,`type`)"
                     + "VALUES(null,'"
                     + event.getName() + "','"
                     + event.getDescription() + "','"
@@ -171,7 +173,8 @@ public class DBManager {
                     + event.getEndTime() + "','"
                     + event.getCreator() + "','"
                     + event.getFrequency() + "','"
-                    + event.getInviteesString()
+                    + event.getInviteesString() + "','"
+                    + event.getType()
                     + "');";
             
 		try {

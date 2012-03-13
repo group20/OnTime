@@ -70,12 +70,22 @@ public class TimetableManager {
                         output += ("    <div class=\"daybar\"><p>" + dayNumber + "</p></div>");
                         output += ("    <div class=\"dots\">");
                         output += ("        <ul>");
-                        //******************************************************************
                         for(Event e: eventsForToday) {
-                            output += ("            <li class=\"red\"></li>");            //TODO: need to add entry to 
-                        //output += ("            <li class=\"green\"></li>");        db for types of events
+                            switch(e.getType()) {
+                                case 0:
+                                    output += ("            <li class=\"blue\"></li>");
+                                    break;
+                                case 1:
+                                    output += ("            <li class=\"yellow\"></li>");
+                                    break;
+                                case 2:
+                                    output += ("            <li class=\"green\"></li>");
+                                    break;
+                                case 3:
+                                    output += ("            <li class=\"red\"></li>");
+                                    break;
+                            }
                         }
-                        //***************************************************************
                         output += ("        </ul>");
                         output += ("    </div>	");
                         output += ("    <!-- slide open -->");
@@ -86,12 +96,26 @@ public class TimetableManager {
                         for(Event e: eventsForToday) {
                             int duration = e.getEndTime() - e.getStartTime();
                             int startTime = e.getStartTime() - currEventStart - duration;
-
-                            output += ("            <li class=\"yellow l" + duration + " a" + startTime + " \"><a href=\"#\" class=\"orange\"><p>" 
-                                                                + e.getStartTime() + ":00 " + e.getDescription() + "</p></a></li>");
+                            switch(e.getType()) {
+                                case 0:
+                                    output += ("            <li class=\"blue l");
+                                    break;
+                                case 1:
+                                    output += ("            <li class=\"yellow l");
+                                    break;
+                                case 2:
+                                    output += ("            <li class=\"green l");
+                                    break;
+                                case 3:
+                                    output += ("            <li class=\"red l");
+                                    break;
+                            }
+                       
+                            output += ("" + duration + " a" + startTime + " \"><p>" + e.getStartTime() + ":00 - " 
+                                        +e.getEndTime() + ":00 " + e.getName() + "<br />" + e.getDescription() + "</p></li>");
                             currEventStart = e.getStartTime();
-                            
-                        }				
+                         }    
+                        				
                         output += ("        </ul>");
                         output += ("    </div>	");
                         output += ("    <!-- slide closed -->");
@@ -106,12 +130,22 @@ public class TimetableManager {
                         output += ("    <div class=\"daybar\"><p>" + dayNumber + "</p></div>");
                         output += ("    <div class=\"dots\">");
                         output += ("        <ul>");
-                        //******************************************************************
                         for(Event e: eventsForToday) {
-                            output += ("            <li class=\"red\"></li>");            //TODO: need to add entry to 
-                        //output += ("            <li class=\"green\"></li>");        db for types of events
+                            switch(e.getType()) {
+                                case 0:
+                                    output += ("            <li class=\"blue\"></li>");
+                                    break;
+                                case 1:
+                                    output += ("            <li class=\"yellow\"></li>");
+                                    break;
+                                case 2:
+                                    output += ("            <li class=\"green\"></li>");
+                                    break;
+                                case 3:
+                                    output += ("            <li class=\"red\"></li>");
+                                    break;
+                            }
                         }
-                        //***************************************************************
                         output += ("        </ul>");
                         output += ("    </div>	");
                         output += ("    <!-- slide open -->");
@@ -121,9 +155,23 @@ public class TimetableManager {
                         
                         for(Event e: eventsForToday) {
                             int duration = e.getEndTime() - e.getStartTime();
-                            int startTime = e.getStartTime() - currEventStart - duration;
-                            output += ("            <li class=\"yellow l" + duration + " a" + startTime + " \"><p>"
-                                                    + e.getStartTime() + ":00 " + e.getName() + " - " + e.getDescription() + "</p></li>");
+                            int startTime = e.getStartTime();// - currEventStart - duration;
+                            switch(e.getType()) {
+                                case 0:
+                                    output += ("            <li class=\"blue l");
+                                    break;
+                                case 1:
+                                    output += ("            <li class=\"yellow l");
+                                    break;
+                                case 2:
+                                    output += ("            <li class=\"green l");
+                                    break;
+                                case 3:
+                                    output += ("            <li class=\"red l");
+                                    break;
+                            }
+                            output += ("" + duration + " a" + startTime + " \"><p>"
+                                        + e.getStartTime() + ":00 " + e.getName() + " - " + e.getDescription() + "</p></li>");
                             currEventStart = e.getStartTime();
                             
                         }				
@@ -164,8 +212,10 @@ public class TimetableManager {
 
                 }
                //now add the results for this period to the list of events
-               resultEvents.add(new Event(0,"", ""+count,
-                                        currDate, currDate, j, j+1, "", "", ""));
+               int type = (count==0)?0:3;
+               
+               resultEvents.add(new Event("", ""+count,
+                                        currDate, currDate, j, j+1, "", "", "",type));
                count = 0;
            }
            cal.add(Calendar.DAY_OF_MONTH,1);
