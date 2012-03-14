@@ -176,7 +176,7 @@ notes: Must create function to highlight the current day (.today)
                 out.print("UserName : " + session.getAttribute("sessUserName"));
             %>
             <p><a href="logout.jsp">Logout</a></p>
-                       <ul class="container">
+ <ul class="container">
                 <li class="menu">
 
                     <ul>
@@ -258,7 +258,7 @@ notes: Must create function to highlight the current day (.today)
                                         <input type="submit" value="Create" name="submit" class="submit" />
                                         
                                     </form>
-                                    <div id="testdiv1" style="
+                                    <div id="testdiv1" style="position:absolute;
 visibility:hidden;
 background-color:white;
 layer-background-color:white;">
@@ -276,6 +276,7 @@ layer-background-color:white;">
 
 </ul>
 </div>
+
             
              
 <div id="calendar">

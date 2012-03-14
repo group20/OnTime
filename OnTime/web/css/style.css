@@ -172,7 +172,6 @@ input.submit:active {
     box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4); }
 
 #welcome{
-    top:10px;
     float:left;
     color:white;
 }
