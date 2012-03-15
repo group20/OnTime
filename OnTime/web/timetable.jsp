@@ -90,79 +90,78 @@ notes: Must create function to highlight the current day (.today)
             );}
             $(document).ready(function() {initMenu();});
             
-             $(function(){
-
-                    //attach autocomplete
-                    $("#to").autocomplete({
-
-                    //define callback to format results
-                    source: function(req, add){
-
-                    //pass request to server
-                    $.getJSON("http://localhost/xampp/names.php?callback=?", req, function(data) {
-
-                    //create array for response objects
-                    var suggestions = [];
-
-                    //process response
-                    $.each(data, function(i, val){
-                    suggestions.push(val.name);
-                    });
-
-                    //pass array to callback
-                    add(suggestions);
-                    });
-                    },
-
-                    //define select handler
-                    select: function(e, ui) {
-
-
-                    //create formatted friend
-                    var friend = ui.item.value,
-                    span = $("<span>").text(friend),
-
-                    input= $("<input>").attr({type: "hidden", name: "invitees" +count, value: friend}),
-
-                    a = $("<a>").addClass("remove").attr({
-                    href: "javascript:",
-                                                                                    input: "",
-                    title: "Remove " + friend
-                    }).text(" x").appendTo(span);
-
-                    //add friend to friend div
-                                                                    input.insertBefore("#to");
-                    span.insertBefore("#to");
-                                                                count++;
-                    },
-
-                    //define select handler
-                    change: function() {
-
-                    //prevent 'to' field being updated and correct position
-                    $("#to").val("").css("top", 2);
-                    }
-                    });
-
-                    //add click handler to friends div
-                    $("#to").click(function(){
-
-                    //focus 'to' field
-                    $("#to").focus();
-                    });
-
-                    //add live handler for clicks on remove links
-                    $(".remove", document.getElementById("friends")).live("click", function(){
-
-                    //remove current friend
-                    $(this).parent().remove();
-
-                    //correct 'to' field position
-                    if($("#friends span").length === 0) {
-                    $("#to").css("top", 0);
-                    }
-                    });
-                    });
+            
+            $(function(){
+				
+				//attach autocomplete
+				$("#to").autocomplete({
+					
+					//define callback to format results
+					source: function(req, add){
+					
+						//pass request to server
+						$.getJSON("http://localhost/project/names.php?callback=?", req, function(data) {
+							
+							//create array for response objects
+							var suggestions = [];
+							
+							//process response
+							$.each(data, function(i, val){								
+								suggestions.push(val.name);
+							});
+							
+							//pass array to callback
+							add(suggestions);
+						});
+					},
+					
+					//define select handler
+					select: function(e, ui) {
+						
+						//create formatted friend
+						var friend = ui.item.value,
+							span = $("<span>").text(friend),
+                                                        input= $("<input>").attr({type: "hidden", name: "invitees" +count, value: friend}),
+							a = $("<a>").addClass("remove").attr({
+								href: "javascript:",
+                                                                    input: "",
+								title: "Remove " + friend
+							}).text("x").appendTo(span);
+						
+						//add friend to friend div
+						span.insertBefore("#to");
+                                                 input.insertBefore("#to");
+                                                   count++;
+					},
+					
+					//define select handler
+					change: function() {
+						
+						//prevent 'to' field being updated and correct position
+						$("#to").val(" ").css("top", 2);
+					}
+				});
+				
+				//add click handler to friends div
+				$("#friends").click(function(){
+					
+					//focus 'to' field
+					$("#to").focus();
+				});
+				
+				//add live handler for clicks on remove links
+				$(".remove", document.getElementById("friends")).live("click", function(){
+				
+					//remove current friend
+					$(this).parent().remove();
+					
+					//correct 'to' field position
+					if($("#friends span").length === 0) {
+						$("#to").css("top", 0);
+					}				
+				});				
+			});
+         
         </script>
         <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -239,10 +238,10 @@ notes: Must create function to highlight the current day (.today)
                                         <!--<input type="time" name="endtime" tabindex="6" placeholder="End Time" required />-->
                                         <!--<input type="text" name="invitiees" placeholder="Who's going?" tabindex="7" />-->
                                         
-                                          <div id="friends" class="ui-helper-clearfix">
-                                              <label id="toLabel">People to meet:</label>
-                                                <input id ="inputtest" name="invitiees" id="to" type="text" />
-                                            </div>
+                                          <label id="toLabel">To:</label>
+					<div id="friends" class="ui-helper-clearfix">
+						<input id="to" type="text">
+					</div>
                                         <select name="frequency" >
                                             <option value="0">One-time event</option>
                                             <option value="1">Daily</option>
