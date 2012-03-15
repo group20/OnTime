@@ -108,6 +108,7 @@ public class TimetableManager {
                         for(Event e: eventsForToday) {
                             int duration = e.getEndTime() - e.getStartTime();
                             int startTime = e.getStartTime() - currEventStart - duration;
+                            output += ("<div id=\"" + e.getID() + "\" >");
                             switch(e.getType()) {
                                 case 0:
                                     output += ("            <li class=\"blue l");
@@ -126,6 +127,7 @@ public class TimetableManager {
                             output += ("" + duration + " a" + startTime + " \"><p>" + e.getStartTime() + ":00 - " 
                                         +e.getEndTime() + ":00 " + e.getName() + "<br />" + e.getDescription() + "</p></li>");
                             currEventStart = e.getStartTime();
+                            output += "</div>";
                          }    
                         				
                         output += ("        </ul>");
