@@ -108,7 +108,7 @@ public class TimetableManager {
                         for(Event e: eventsForToday) {
                             int duration = e.getEndTime() - e.getStartTime();
                             int startTime = e.getStartTime() - currEventStart - duration;
-                            output += ("<div id=\"" + e.getID() + "\" >");
+                            output += ("<div class=\"onpop\" id=\"" + e.getID() + "\" >");
                             switch(e.getType()) {
                                 case 0:
                                     output += ("            <li class=\"blue l");
