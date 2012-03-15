@@ -19,7 +19,7 @@
     {
         e.printStackTrace();
     }
-    pageContext.forward("success.jsp");
+    response.sendRedirect("timetable.jsp");
     
     
 %>

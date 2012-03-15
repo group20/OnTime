@@ -38,6 +38,12 @@ ul{
 	padding:0;
 }
 
+#welcome2{
+    top:100px;
+    float:left;
+    color:white;
+}
+
 ul.container{
 	/* The topmost UL */
 	width:280px;

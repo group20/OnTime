@@ -11,6 +11,8 @@ table{border-collapse:collapse;border-spacing:0;}
 
 /**************************** Calendar ****************************/
 #calendar{
+    top:30px;
+    position:relative;
     margin: 0 auto;
     width: 760px;
     text-align: center;
